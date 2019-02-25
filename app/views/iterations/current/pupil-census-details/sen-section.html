@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Of the {{ data['sen-total'] | friendlyNumber }} SEN students how many were born in 2016?
+{% endblock %}
+
+{% block content %}
+
+{% if data['sen-total'] | float < 1 %}
+<script>
+
+window.location.href = '#'
+
+</script>
+{% endif %}
+
+{% if data['sen-total'] == nil or data['sen-total'] | float == 0 %}
+<script>
+window.location.href = 'detail-totals'
+</script>
+{% endif %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="sen-section-too-high.html">
+
+                <h1 class="govuk-heading-xl">How many of these {{ data['sen-total'] | friendlyNumber }} SEN pupils were born in 2016?</h1>
+
+                {{ govukInput({
+                    id: 'sen-section',
+                    name: 'sen-section',
+                    value: data['sen-section'] if data['sen-section'] else '',
+                    classes: 'govuk-input--width-5 add-value',
+                    label: {
+                        text: 'Of the ' + data['sen-total'] + ' SEN students how many were born in 2016?',
+                        classes: 'govuk-visually-hidden'
+                    }
+                }) }}
+                
+                <input type="hidden" name="sen-section-error" value="false">
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

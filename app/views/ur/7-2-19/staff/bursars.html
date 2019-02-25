@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Bursars at your school
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="other-staff">
+
+                <h1 class="govuk-heading-xl">Bursars at your school</h1>
+
+                {{ weeklyHours({
+                    subject: 'bursars',
+                    prefix: 'bursars'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

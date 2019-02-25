@@ -1,0 +1,315 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Check your staff details
+{% endblock %}
+
+{% block content %}
+
+{% set qualifiedError = false %}
+
+{% if ([data['qualified-men-error'], data['qualified-women-error']] | arrayContains('no-pt')) or ([data['qualified-men-error'], data['qualified-women-error']] | arrayContains('no-hours')) %}
+    {% set qualifiedError = true %}
+{% endif %}
+
+{% set nonQualifiedError = false %}
+
+{% if ([data['non-qualified-men-error'], data['non-qualified-women-error']] | arrayContains('no-pt')) or ([data['non-qualified-men-error'], data['non-qualified-women-error']] | arrayContains('no-hours')) %}
+    {% set nonQualifiedError = true %}
+{% endif %}
+
+{% set graduatesError = false %}
+
+{% if ([data['graduates-men-error'], data['graduates-women-error']] | arrayContains('no-pt')) or ([data['graduates-men-error'], data['graduates-women-error']] | arrayContains('no-hours')) %}
+    {% set graduatesError = true %}
+{% endif %}
+
+{% set leaveError = false %}
+
+{% if ([data['leave-men-error'], data['leave-women-error']] | arrayContains('no-pt')) or ([data['leave-men-error'], data['leave-women-error']] | arrayContains('no-hours')) %}
+    {% set leaveError = true %}
+{% endif %}
+
+{% set reliefError = false %}
+
+{% if ([data['relief-men-error'], data['relief-women-error']] | arrayContains('no-pt')) or ([data['relief-men-error'], data['relief-women-error']] | arrayContains('no-hours')) %}
+    {% set reliefError = true %}
+{% endif %}
+
+{% set hasErrors = (qualifiedError or nonQualifiedError or graduatesError or leaveError or reliefError) %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            {% if data['is-submitting'] == 'true' and not hasErrors %}
+            <form action="../staff/staff-totals?is-submitting=true">
+            {% else %}
+            <form action="../task-list">
+            {% endif %}
+
+                <h1 class="govuk-heading-xl">Check your teaching staff census data</h1>
+
+                {% if hasErrors %}
+
+                    <p><strong class="govuk-tag govuk-tag--orange">Incomplete</strong></p>
+
+                    <p>There are errors in your teacher census data, you  must fix these errors before this section can be marked as complete.</p>
+
+                    <input type="hidden" name="teachers-complete" value="incomplete">
+
+                {% else %}
+                    <input type="hidden" name="teachers-complete" value="true">
+                {% endif %}
+
+                <h2 class="govuk-heading-l">Teaching staff</h2>
+
+                <h3 class="govuk-heading-m">Headteacher or acting headteacher</h3>
+
+                {{ govukSummaryList({
+                    rows: [
+                        {
+                        key: {
+                            text: "Gender"
+                        },
+                        value: {
+                            text: data['head-gender'] if data['head-gender'] else 'Woman'
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "headteacher?from-totals=true",
+                                    text: "Change",
+                                    visuallyHiddenText: "gender of headteacher"
+                                }
+                            ]
+                        }
+                        }
+                    ]
+                 }) }}
+
+                {{ govukTable({
+                    caption: "Total number of teaching staff",
+                    captionClasses: 'govuk-heading-m',
+                    firstCellIsHeader: true,
+                    head: [
+                        {
+                            text: 'Type'
+                        },
+                        {
+                            text: 'Full-time',
+                                format: 'numeric'
+                        },
+                        {
+                            text: 'Part-time',
+                                format: 'numeric'
+                        },
+                        {
+                            text: 'PT hrs/wk',
+                                format: 'numeric'
+                        },
+                        {
+                            text: ''
+                        }
+                    ],
+                    rows: [
+                        [
+                            {
+                                text: 'Qualified'
+                            },
+                            {
+                                text: [data['qualified-ft-men'], data['qualified-ft-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['qualified-men-error'], data['qualified-women-error']] | arrayContains('no-pt')) + [data['qualified-pt-men'], data['qualified-pt-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['qualified-men-error'], data['qualified-women-error']] | arrayContains('no-hours')) + [data['qualified-pt-men-hours'], data['qualified-pt-women-hours']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/qualified?from-totals=true">' + ('View errors' if qualifiedError else 'Change') + '</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Non-qualified'
+                            },
+                            {
+                                text: [data['non-qualified-ft-men'], data['non-qualified-ft-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['non-qualified-men-error'], data['non-qualified-women-error']] | arrayContains('no-pt')) + [data['non-qualified-pt-men'], data['non-qualified-pt-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['non-qualified-men-error'], data['non-qualified-women-error']] | arrayContains('no-hours')) + [data['non-qualified-pt-men-hours'], data['non-qualified-pt-women-hours']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/non-qualified?from-totals=true">' + ('View errors' if nonQualifiedError else 'Change') + '</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Graduates'
+                            },
+                            {
+                                text: [data['graduates-ft-men'], data['graduates-ft-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['graduates-men-error'], data['graduates-women-error']] | arrayContains('no-pt')) + [data['graduates-pt-men'], data['graduates-pt-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['graduates-men-error'], data['graduates-women-error']] | arrayContains('no-hours')) + [data['graduates-pt-men-hours'], data['graduates-pt-women-hours']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/graduates?from-totals=true">' + ('View errors' if graduatesError else 'Change') + '</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Total'
+                            },
+                            {
+                                text: [data['qualified-ft-men'], data['qualified-ft-women'], data['non-qualified-ft-men'], data['non-qualified-ft-women'], data['graduates-ft-men'], data['graduates-ft-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: [data['qualified-pt-men'], data['qualified-pt-women'], data['non-qualified-pt-men'], data['non-qualified-pt-women'], data['graduates-pt-men'], data['graduates-pt-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: [data['qualified-pt-men-hours'], data['qualified-pt-women-hours'], data['non-qualified-pt-men-hours'], data['non-qualified-pt-women-hours'], data['graduates-pt-men-hours'], data['graduates-pt-women-hours']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: ''
+                            }
+                        ]
+                    ]
+                }) }}
+
+                <div class="govuk-!-margin-bottom-9"></div>
+
+                <h2 class="govuk-heading-l">Other teaching staff</h2>
+
+                {{ govukTable({
+                    caption: "Total number of other teaching staff",
+                    captionClasses: 'govuk-heading-m',
+                    firstCellIsHeader: true,
+                    head: [
+                        {
+                            text: 'Type'
+                        },
+                        {
+                            text: 'Full-time',
+                                format: 'numeric'
+                        },
+                        {
+                            text: 'Part-time',
+                                format: 'numeric'
+                        },
+                        {
+                            text: 'PT hrs/wk',
+                                format: 'numeric'
+                        },
+                        {
+                            text: ''
+                        }
+                    ],
+                    rows: [
+                        [
+                            {
+                                text: 'Long term absent'
+                            },
+                            {
+                                text: [data['leave-ft-men'], data['leave-ft-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['leave-men-error'], data['leave-women-error']] | arrayContains('no-pt')) + [data['leave-pt-men'], data['leave-pt-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['leave-men-error'], data['leave-women-error']] | arrayContains('no-hours')) + [data['leave-pt-men-hours'], data['leave-pt-women-hours']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="leave-numbers?from-totals=true">' + ('View errors' if leaveError else 'Change') + '</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Relief staff'
+                            },
+                            {
+                                text: [data['relief-ft-men'], data['relief-ft-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['relief-men-error'], data['relief-women-error']] | arrayContains('no-pt')) + [data['relief-pt-men'], data['relief-pt-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if [data['relief-men-error'], data['relief-women-error']] | arrayContains('no-hours')) + [data['relief-pt-men-hours'], data['relief-pt-women-hours']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="relief-staff-numbers?from-totals=true">' + ('View errors' if reliefError else 'Change') + '</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Total'
+                            },
+                            {
+                                text: [data['relief-ft-men'], data['relief-ft-women'], data['leave-ft-men'], data['leave-ft-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: [data['relief-pt-men'], data['relief-pt-women'], data['leave-pt-men'], data['leave-pt-women']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: [data['relief-pt-men-hours'], data['relief-pt-women-hours'], data['leave-pt-men-hours'], data['leave-pt-women-hours']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: ''
+                            }
+                        ]
+                    ]
+                }) }}
+
+                <div class="govuk-!-margin-bottom-9"></div>
+
+                {% if data['is-submitting'] == 'true' and not hasErrors  %}
+                {{ govukButton({
+                    html: 'Confirm and continue'
+                }) }}
+                <p><a href="../task-list.html?is-submitting=false">Cancel and go back to the overview</a></p>
+                {% else %}
+                {{ govukButton({
+                    html: 'Save and go back to overview'
+                }) }}
+                {% endif %}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

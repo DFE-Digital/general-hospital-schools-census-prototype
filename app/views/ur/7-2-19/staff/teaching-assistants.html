@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Teaching assistants at your school
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="other-assistants">
+
+                <h1 class="govuk-heading-xl">Teaching assistants at your school</h1>
+
+                {{ weeklyHours({
+                    subject: 'teaching assistants',
+                    prefix: 'teaching-assistants'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    You have told us that your school has no sole or main dual registered full-time pupils
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="../free-school-meals.html">
+
+                <h1 class="govuk-heading-xl">You have told us that your school has no sole or main dual registered full-time pupils</h1>
+
+                <p>If this is correct the number of remaining full-time pupils that attend your school does not need to be reported. For example; these may include subsidiary or guest pupils.</p>
+                
+
+                {{ govukButton({
+                    html: 'Continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

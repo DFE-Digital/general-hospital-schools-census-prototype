@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Higher-level teaching assistants at your school
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="teaching-assistants">
+
+                <h1 class="govuk-heading-xl">Higher-level teaching assistants at your school</h1>
+
+                <p>Include only teaching assistants here with a HLTA qualification.</p>
+
+                {{ weeklyHours({
+                    subject: 'higher-level teaching assistants',
+                    prefix: 'hlta-teaching-assistants'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

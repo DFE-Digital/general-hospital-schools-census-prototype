@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Do any full-time pupils attend your school?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">Do any full-time pupils attend your school?</h1>
+
+                {{ govukRadios({
+                    classes: 'govuk-radios--inline',
+                    idPrefix: 'any-full-time',
+                    name: 'any-full-time',
+                    fieldset: {
+                        legend: {
+                            text: 'Do any full-time pupils attend your school?',
+                            isPageHeading: false,
+                            classes: 'govuk-fieldset__legend--xl govuk-visually-hidden'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Yes',
+                            value: 'yes'
+                        },
+                        {
+                            text: 'No',
+                            value: 'no'
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+<script>
+
+    var nextPageRoutes = {
+        yes : 'full-time/dual.html',
+        // {% if data['any-part-time'] == 'no' %}
+        no : 'no-pupils.html'
+        // {% else %}
+        no : 'pupil-totals.html'
+        // {% endif %}
+    }
+
+</script>
+
+{% endblock %}

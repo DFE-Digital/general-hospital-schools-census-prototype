@@ -1,0 +1,26 @@
+.govuk-currency-input {
+  @include govuk-typography-common; 
+
+    &__inner {
+      position: relative;
+  
+      &__unit {
+        position: absolute;
+        bottom: 7px;
+        left: 10px;
+        font-weight: bold;
+      }
+  
+      &__input {
+        padding-left: 25px;
+      }
+    }
+  }
+
+.add-form-element {
+    display: flex;
+    align-items: flex-start;
+    > *:last-child {
+      margin-left: 20px;
+    }
+  }

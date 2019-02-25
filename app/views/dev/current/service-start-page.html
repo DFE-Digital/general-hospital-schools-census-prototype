@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page
+{% endblock %}
+
+{% block beforeContent %}
+  <div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="https://www.gov.uk">Home</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="#">Schools and education</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link">School census</a>
+      </li>
+    </ol>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Return your general hospital school census
+      </h1>
+
+      <p>Use this service to return your general hospital school census to the Department for Education.</p>
+
+      {{ govukInsetText({
+          text: 'There are 3 parts to this census. You must complete each part before the submission deadline on <b>15 February 2019</b>.' | safe
+      }) }}
+
+      {% if data['user-type'] == 'la' %}
+        <a href="la-view" role="button" class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">Start now</a>
+      {% else %}
+        <a href="task-list" role="button" class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8">Start now</a>
+      {% endif %}
+
+      <h2 class="govuk-heading-m">Before you start</h2>
+
+      <p>We recommend you gather the information you need to complete your return before you start.</p>
+      <p>You should give yourself plenty of time.</p>
+      <p>You can save your answers as you go along and return to the form later.</p>
+
+    </div>
+
+  </div>
+{% endblock %}

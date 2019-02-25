@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    The number of free school meal eligible pupils entered is higher than your total number of pupils
+{% endblock %}
+
+{% block content %}
+
+{% if data['pupil-total'] | float >= data['fsm-total'] | float  %}
+<script>
+// {% if data['from-totals'] == 'true' %}
+window.location.href = 'detail-totals.html';
+// {% else %}
+window.location.href = 'sen-pupils.html';
+// {% endif %}
+</script>
+{% endif %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">The number of pupils eligible for free school meals is higher than the total number of pupils at your school</h1>
+
+                {% if data['pupil-total'] | friendlyNumber == 'None' %}
+
+                <p>You have told us that your school has no pupils and the number of pupils eligible for free school meals is {{ data['fsm-total'] | friendlyNumber }}.</p>
+
+                {% else %}
+
+                <p>You have told us that your total number of pupils is {{ data['pupil-total'] | friendlyNumber }} and the number of pupils eligible for free school meals is {{ data['fsm-total'] | friendlyNumber }}.</p>
+
+                {% endif %}
+
+                {{ govukRadios({
+                    idPrefix: 'fsm-skip',
+                    name: 'fsm-skip',
+                    fieldset: {
+                        legend: {
+                            text: 'What do you want to do?',
+                            isPageHeading: false,
+                            classes: 'govuk-fieldset__legend--m'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Update the number of pupils at your school',
+                            value: 'change-pupils'
+                        },
+                        {
+                            text: 'Update the number of pupils eligible for free school meals',
+                            value: 'change-fsm'
+                        },
+                        {
+                            text: 'Save your answers and update later',
+                            value: 'skip'
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+<script>
+
+    var nextPageRoutes = {
+        'change-pupils' : '../pupil-numbers/pupil-totals.html?from-fsm=true',
+        'change-fsm' : 'free-school-meals.html',
+        // {% if data['from-totals'] == 'true' %}
+        'skip' : 'detail-totals.html?fsm-error=true',
+        // {% else %}
+        'skip' : 'sen-pupils.html?fsm-error=true',
+        // {% endif %}
+    }
+
+</script>
+
+{% endblock %}

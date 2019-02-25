@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Other staff at your school
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%other-staff%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = '../staff-totals'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="../staff-totals">
+
+                <h1 class="govuk-heading-xl">Other staff at your school</h1>
+
+                {{ weeklyHours({
+                    subject: 'other staff',
+                    prefix: 'other-staff'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

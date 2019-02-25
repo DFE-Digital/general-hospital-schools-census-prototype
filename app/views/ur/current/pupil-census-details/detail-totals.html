@@ -1,0 +1,497 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Check the answers you have given for pupil census details
+{% endblock %}
+
+{% block content %}
+
+{% set hasErrors = ((data['fsm-error'] == 'true') or (data['sen-error'] == 'true') or (data['sen-section-error'] == 'true')) %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            {% if data['is-submitting'] == 'true' and not hasErrors %}
+            <form action="../teachers/teacher-totals?is-submitting=true">
+            {% else %}
+            <form action="../task-list.html">
+            {% endif %}
+
+        
+
+                <h1 class="govuk-heading-xl">Check and save your answers</h1>
+
+                {% if data['no-pupils'] == 'yes' %}
+                <p>You have told us that you there are no pupils on this school register, therefore this section does not need to be completed.</p>
+                <input type="hidden" name="pupil-details-complete" value="true">
+            {% else %}
+
+                {% if ((data['fsm-error'] == 'true') or (data['sen-error'] == 'true') or (data['sen-section-error'] == 'true')) %}
+
+                    <p><strong class="govuk-tag govuk-tag--orange">Incomplete</strong></p>
+
+                    <p>There are errors in your pupil census details, you  must fix these errors before this section can be marked as complete.</p>
+
+                    <input type="hidden" name="pupil-details-complete" value="incomplete">
+
+                {% else %}
+                    <input type="hidden" name="pupil-details-complete" value="true">
+                {% endif %}
+
+                {{ govukTable({
+                    caption: 'Total number of pupils who are eligible for free school meals',
+                    captionClasses: 'govuk-heading-m',
+                    firstCellIsHeader: true,
+                    head: [
+                        {
+                            text: 'Registration type'
+                        },
+                        {
+                            text: 'Type'
+                        },
+                        {
+                            text: 'Total',
+                            format: 'numeric'
+                        },
+                        {
+                            text: ''
+                        }
+                    ],
+                    rows: [
+                        [
+                            {
+                                text: 'Sole'
+                            },
+                            {
+                                text: 'Full-time'
+                            },
+                            {
+                                text: data['fsm-ft-sole'] | friendlyNumber if data['fsm-ft-sole'] else 'None',
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="free-school-meals.html?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['full-time-sole-total'],
+                        [
+                            {
+                                text: 'Sole'
+                            },
+                            {
+                                text: 'Part-time'
+                            },
+                            {
+                                text: data['fsm-pt-sole'] | friendlyNumber if data['fsm-pt-sole'] else 'None',
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="free-school-meals.html?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['part-time-sole-total'],
+                        [
+                            {
+                                text: 'Main dual'
+                            },
+                            {
+                                text: 'Full-time'
+                            },
+                            {
+                                text: data['fsm-ft-dual'] | friendlyNumber if data['fsm-ft-dual'] else 'None',
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="free-school-meals.html?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['full-time-dual-total'],
+                        [
+                            {
+                                text: 'Main dual'
+                            },
+                            {
+                                text: 'Part-time'
+                            },
+                            {
+                                text: data['fsm-pt-dual'] | friendlyNumber if data['fsm-pt-dual'] else 'None',
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="free-school-meals.html?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['part-time-dual-total'],
+                        [
+                            {
+                                text: 'Total FSM eligible pupils',
+                                colspan: '2'
+                            },
+                            {
+                                text: ''
+                            },
+                            {
+                                html: ('<strong class="data-error"></strong>' if data['fsm-error'] == 'true' else '<strong id="fsmErrorIcon" class="data-query" style="display: none;"></strong>') + data['fsm-total'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<a href="fsm-too-high?from-totals=true">Fix error</a>' if data['fsm-error'] == 'true')
+                            }
+                        ]
+                    ]
+                }) }}
+
+
+                {% set fsmYONYWarning = 'false' %}
+
+                {% if data['yony-fsm-trigger'] == 'yes' %}
+
+                    {% set fsmYONYDiff = data['fsm-total'] | float - data['yony-fsm-figure'] | float %}
+
+                        {% set fsmPercentDiff = fsmYONYDiff / data['yony-fsm-figure'] | float * 100 %}
+
+                        {% if fsmPercentDiff > 15 %}
+
+                        {% set fsmYONYWarning = 'too-many' %}
+
+                        {% if data['is-submitting'] == 'true' and not hasErrors %}
+
+                        {{ govukTextarea({
+                            id: 'fsm-explain',
+                            name: 'fsm-explain',
+                            value: data['fsm-explain'] if data['fsm-explain'] else '',
+                            label: {
+                                text: 'This school had a total of ' + data['yony-fsm-figure'] + ' FSM eligible pupils last year. Explain why there are significantly more pupils eligible for free school meals this year.'
+                            }
+                        }) }}
+
+                        {% else %}
+
+                        {{ govukWarningText({
+                            text: 'This school had a total of ' + data['yony-fsm-figure'] + ' FSM eligible pupils last year. You have entered significantly more than last year. If this is correct you will need give us an explanation when you submit this census.',
+                            iconFallbackText: 'Warning'
+                        }) }}
+                        
+                        {% endif %}
+
+                        {% elseif fsmPercentDiff < -15 %}
+
+                        {% set fsmYONYWarning = 'too-few' %}
+
+                        {% if data['is-submitting'] == 'true' and not hasErrors %}
+
+                        {{ govukTextarea({
+                            id: 'fsm-explain',
+                            name: 'fsm-explain',
+                            value: data['fsm-explain'] if data['fsm-explain'] else '',
+                            label: {
+                                text: 'This school had a total of ' + data['yony-fsm-figure'] + ' FSM eligible pupils last year. Explain why there are significantly fewer pupils eligible for free school meals this year.'
+                            }
+                        }) }}
+
+                        {% else %}
+
+                        {{ govukWarningText({
+                            text: 'This school had a total of ' + data['yony-fsm-figure'] + ' FSM eligible pupils last year. You have entered significantly fewer pupils than last year. If this is correct you will need give us an explanation when you submit this census.',
+                            iconFallbackText: 'Warning'
+                        }) }}
+
+                        {% endif %}
+
+                    {% endif %}
+
+                {% endif %}
+
+                <input type="hidden" name="fsm-yony-warning" value="{{ fsmYONYWarning }}">
+
+                <div class="govuk-!-margin-bottom-9"></div>
+
+                {{ govukTable({
+                    caption: 'Total number of SEN pupils',
+                    captionClasses: 'govuk-heading-m',
+                    firstCellIsHeader: true,
+                    head: [
+                        {
+                            text: 'Registration type'
+                        },
+                        {
+                            text: 'Type'
+                        },
+                        {
+                            text: 'EHC plan status'
+                        },
+                        {
+                            text: 'Total',
+                            format: 'numeric'
+                        },
+                        {
+                            text: ''
+                        }
+                    ],
+                    rows: [
+                        [
+                            {
+                                text: 'Sole'
+                            },
+                            {
+                                text: 'Full-time and part-time'
+                            },
+                            {
+                                text: 'With EHC plan'
+                            },
+                            {
+                                text: data['sen-ehcp-sole'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="sen-pupils?from-totals=true">Change</a>' | safe
+                            }
+                        ] if (data['full-time-sole-total'] or data['part-time-sole-total']),
+                        [
+                            {
+                                text: 'Main dual'
+                            },
+                            {
+                                text: 'Full-time'
+                            },
+                            {
+                                text: 'With EHC plan'
+                            },
+                            {
+                                text: data['sen-ehcp-ft-dual'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="sen-pupils?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['full-time-dual-total'],
+                        [
+                            {
+                                text: 'Main dual'
+                            },
+                            {
+                                text: 'Part-time'
+                            },
+                            {
+                                text: 'With EHC plan'
+                            },
+                            {
+                                text: data['sen-ehcp-pt-dual'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="sen-pupils?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['part-time-dual-total'],
+                        [
+                            {
+                                text: 'Sole'
+                            },
+                            {
+                                text: 'Full-time and part-time'
+                            },
+                            {
+                                text: 'No EHC plan'
+                            },
+                            {
+                                text: data['sen-sole'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="sen-pupils?from-totals=true">Change</a>' | safe
+                            }
+                        ] if (data['full-time-sole-total'] or data['part-time-sole-total']),
+                        [
+                            {
+                                text: 'Main dual'
+                            },
+                            {
+                                text: 'Full-time'
+                            },
+                            {
+                                text: 'No EHC plan'
+                            },
+                            {
+                                text: data['sen-ft-dual'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="sen-pupils?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['full-time-dual-total'],
+                        [
+                            {
+                                text: 'Main dual'
+                            },
+                            {
+                                text: 'Part-time'
+                            },
+                            {
+                                text: 'No EHC plan'
+                            },
+                            {
+                                text: data['sen-pt-dual'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="sen-pupils?from-totals=true">Change</a>' | safe
+                            }
+                        ] if data['part-time-dual-total'],
+                        [
+                            {
+                                text: 'Total SEN pupils'
+                            },
+                            {
+                                text: ''
+                            },
+                            {
+                                text: ''
+                            },
+                            {
+                                html: ('<strong class="data-error nowrap"></strong>' if data['sen-error'] == 'true' else '<strong id="senErrorIcon" class="data-query" style="display: none;"></strong>') + data['sen-total'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: ('<a class="nowrap" href="sen-too-high?from-totals=true">Fix error</a>' if data['sen-error'] == 'true')
+                            }
+                        ]
+                    ]
+                }) }}
+
+                {% set senYONYWarning = 'false' %}
+
+                {% if data['yony-sen-trigger'] == 'yes' %}
+
+                    {% set senYONYDiff = data['sen-total'] | float - data['yony-sen-figure'] | float %}
+
+                    {% if senYONYDiff | abs > 12 %}
+
+                        {% set senPercentDiff = senYONYDiff / data['yony-sen-figure'] | float * 100 %}
+
+                        {% if senPercentDiff > 32 %}
+
+                        {% set senYONYWarning = 'too-many' %}
+
+                        {% if data['is-submitting'] == 'true' and not hasErrors %}
+
+                        {{ govukTextarea({
+                            id: 'sen-explain',
+                            name: 'sen-explain',
+                            value: data['sen-explain'] if data['sen-explain'] else '',
+                            label: {
+                                text: 'This school had a total of ' + data['yony-sen-figure'] + ' SEN pupils last year. Explain why there are significantly more SEN pupils this year.'
+                            }
+                        }) }}
+
+                        {% else %}
+
+                        {{ govukWarningText({
+                            text: 'This school had a total of ' + data['yony-sen-figure'] + ' SEN pupils last year. You have entered significantly more than last year. If this is correct you will need give us an explanation when you submit this census.',
+                            iconFallbackText: 'Warning'
+                        }) }}
+
+                        {% endif %}
+
+                        {% elseif senPercentDiff < -32 %}
+
+                        {% set senYONYWarning = 'too-few' %}
+
+                        {% if data['is-submitting'] == 'true' and not hasErrors %}
+
+                        {{ govukTextarea({
+                            id: 'sen-explain',
+                            name: 'sen-explain',
+                            value: data['sen-explain'] if data['sen-explain'] else '',
+                            label: {
+                                text: 'This school had a total of ' + data['yony-sen-figure'] + ' SEN pupils last year. Explain why there are significantly more SEN pupils this year.'
+                            }
+                        }) }}
+
+                        {% else %}
+
+                        {{ govukWarningText({
+                            text: 'This school had a total of ' + data['yony-sen-figure'] + ' SEN pupils last year. You have entered significantly fewer pupils than last year. If this is correct you will need give us an explanation when you submit this census.',
+                            iconFallbackText: 'Warning'
+                        }) }}
+
+                        {% endif %}
+
+                        {% endif %}
+
+                    {% endif %}
+
+                {% endif %}
+
+                <input type="hidden" name="sen-yony-warning" value="{{ senYONYWarning }}">
+
+                <div class="govuk-!-margin-bottom-9"></div>
+
+                <h2 class="govuk-heading-m">Number of SEN pupils born in 2016</h2>
+
+                {{ govukSummaryList({
+                    rows: [
+                        {
+                        key: {
+                            text: "Total"
+                        },
+                        value: {
+                            html: ('<strong class="data-error nowrap"></strong>' if data['sen-section-error'] == 'true') + data['sen-section'] if data['sen-section'] else 'None'
+                        },
+                        actions: {
+                            items: [
+                                {
+                                    href: "sen-section-too-high?from-totals=true",
+                                    text: "Fix error"
+                                } if (data['sen-section-error'] == 'true') else {
+                                    href: "sen-section?from-totals=true",
+                                    text: "Change",
+                                    visuallyHiddenText: "amount"
+                                }
+                            ]
+                        }
+                        }
+                    ]
+                    }) }}
+
+                {% endif %}
+
+                {% if fsmYONYWarning != 'false' %}
+                <script>
+                    $(document).ready(function() {
+                        $('#fsmErrorIcon').show();
+                    });
+                </script>
+                {% endif %}
+
+                {% if senYONYWarning != 'false' %}
+                <script>
+                    $(document).ready(function() {
+                        $('#senErrorIcon').show();
+                    });
+                </script>
+                {% endif %}
+                
+                <input type="hidden" name="pupil-census-details-complete" value="true">
+
+                <div class="govuk-!-margin-bottom-9"></div>
+
+                {% if data['is-submitting'] == 'true' and not hasErrors %}
+                {{ govukButton({
+                    html: 'Confirm and continue'
+                }) }}
+                <p><a href="../task-list.html?is-submitting=false">Cancel and return to tasks</a></p>
+                {% else %}
+                {{ govukButton({
+                    html: 'Save and return to tasks'
+                }) }}
+                {% endif %}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

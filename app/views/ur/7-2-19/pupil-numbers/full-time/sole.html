@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Are any of your full-time pupils sole registered?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">Are any of your full-time pupils sole registered?</h1>
+
+                <p>A sole registration means that the pupil is not on the register of another school.</p>
+
+                {{ govukRadios({
+                    classes: 'govuk-radios--inline',
+                    idPrefix: 'ft-sole-reg',
+                    name: 'ft-sole-reg',
+                    fieldset: {
+                        legend: {
+                            text: 'Are any of your part-time pupils sole registered?',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--xl govuk-visually-hidden'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Yes',
+                            value: 'yes'
+                        },
+                        {
+                            text: 'No',
+                            value: 'no'
+                        }
+                    ]
+                }) }}
+                
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+<script>
+
+    var nextPageRoutes = {
+        yes : 'sole-numbers.html',
+        // {% if data['pt-dual-reg'] == 'no' %}
+        no : 'neither.html'
+        // {% else %}
+        no : '#'
+        // {% endif %}
+    }
+
+</script>
+
+{% endblock %}

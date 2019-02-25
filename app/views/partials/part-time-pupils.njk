@@ -1,0 +1,336 @@
+{% macro partTimePupils(options, data) %}
+
+{% from "input/macro.njk" import govukInput %}
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            4 years
+        </label>
+        <span class="govuk-hint">1 September 2014 - 31 December 2014</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-4-1',
+            name: options.prefix + '-male-4-1',
+            value: data[options.prefix + '-male-4-1'] if data[options.prefix + '-male-4-1'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-4-1',
+            name: options.prefix + '-female-4-1',
+            value: data[options.prefix + '-female-4-1'] if data[options.prefix + '-female-4-1'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            4 years
+        </label>
+        <span class="govuk-hint">1 January 2015 - 31 March 2015</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-4-2',
+            name: options.prefix + '-male-4-2',
+            value: data[options.prefix + '-male-4-2'] if data[options.prefix + '-male-4-2'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-4-2',
+            name: options.prefix + '-female-4-2',
+            value: data[options.prefix + '-female-4-2'] if data[options.prefix + '-female-4-2'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            4 years
+        </label>
+        <span class="govuk-hint">1 April 2015 - 31 August 2015</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-4-3',
+            name: options.prefix + '-male-4-3',
+            value: data[options.prefix + '-male-4-3'] if data[options.prefix + '-male-4-3'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-4-3',
+            name: options.prefix + '-female-4-3',
+            value: data[options.prefix + '-female-4-3'] if data[options.prefix + '-female-4-3'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            3 years
+        </label>
+        <span class="govuk-hint">1 September 2015 - 31 December 2015</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-3-1',
+            name: options.prefix + '-male-3-1',
+            value: data[options.prefix + '-male-3-1'] if data[options.prefix + '-male-3-1'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-3-1',
+            name: options.prefix + '-female-3-1',
+            value: data[options.prefix + '-female-3-1'] if data[options.prefix + '-female-3-1'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            3 years
+        </label>
+        <span class="govuk-hint">1 January 2016 - 31 March 2016</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-3-2',
+            name: options.prefix + '-male-3-2',
+            value: data[options.prefix + '-male-3-2'] if data[options.prefix + '-male-3-2'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-3-2',
+            name: options.prefix + '-female-3-2',
+            value: data[options.prefix + '-female-3-2'] if data[options.prefix + '-female-3-2'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            3 years
+        </label>
+        <span class="govuk-hint">1 April 2016 - 31 August 2016</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-3-3',
+            name: options.prefix + '-male-3-3',
+            value: data[options.prefix + '-male-3-3'] if data[options.prefix + '-male-3-3'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-3-3',
+            name: options.prefix + '-female-3-3',
+            value: data[options.prefix + '-female-3-3'] if data[options.prefix + '-female-3-3'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            2 years
+        </label>
+        <span class="govuk-hint">1 September 2016 - 31 December 2016</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-2-1',
+            name: options.prefix + '-male-2-1',
+            value: data[options.prefix + '-male-2-1'] if data[options.prefix + '-male-2-1'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-2-1',
+            name: options.prefix + '-female-2-1',
+            value: data[options.prefix + '-female-2-1'] if data[options.prefix + '-female-2-1'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            2 years
+        </label>
+        <span class="govuk-hint">1 January 2017 - 31 March 2017</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-2-2',
+            name: options.prefix + '-male-2-2',
+            value: data[options.prefix + '-male-2-2'] if data[options.prefix + '-male-2-2'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-2-2',
+            name: options.prefix + '-female-2-2',
+            value: data[options.prefix + '-female-2-2'] if data[options.prefix + '-female-2-2'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            2 years
+        </label>
+        <span class="govuk-hint">1 April 2017 - 31 August 2017</span>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-2-3',
+            name: options.prefix + '-male-2-3',
+            value: data[options.prefix + '-male-2-3'] if data[options.prefix + '-male-2-3'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-2-3',
+            name: options.prefix + '-female-2-3',
+            value: data[options.prefix + '-female-2-3'] if data[options.prefix + '-female-2-3'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+{% endmacro %}

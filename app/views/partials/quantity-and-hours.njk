@@ -1,0 +1,180 @@
+{% macro quantityAndHours(options, data) %}
+
+{% from "input/macro.njk" import govukInput %}
+{% from "fieldset/macro.njk" import govukFieldset %}
+
+{% call govukFieldset({
+    legend: {
+        text: 'Number of full-time ' + options.subject + ' in the week beginning 14 January 2019',
+        classes: "govuk-fieldset__legend--m",
+        isPageHeading: false
+    }
+}) %}
+
+    <div class="inline-fields">
+
+        {{ govukInput({
+            id: options.prefix + '-ft-men',
+            name: options.prefix + '-ft-men',
+            value: data[options.prefix + '-ft-men'],
+            classes: 'govuk-input--width-4',
+            label: {
+                text: 'Men',
+                classes: ' '
+            }
+        }) }}
+
+        {{ govukInput({
+            id: options.prefix + '-ft-women',
+            name: options.prefix + '-ft-women',
+            value: data[options.prefix + '-ft-women'],
+            classes: 'govuk-input--width-4',
+            label: {
+                text: 'Women',
+                classes: ' '
+            }
+        }) }}
+
+    </div>
+
+{% endcall -%}
+
+{% call govukFieldset({
+    legend: {
+        text: "Number of part-time " + options.subject + ' in the week beginning 14 January 2019',
+        classes: "govuk-fieldset__legend--m",
+        isPageHeading: false
+    }
+}) %}
+
+    {% if (data[options.prefix + '-men-error'] == 'no-pt') %}
+        <p class="govuk-error-message">You have entered part-time weekly hours for men but have not told us how many men work part-time.</p>
+    {% endif %}
+    {% if (data[options.prefix + '-women-error'] == 'no-pt') %}
+        <p class="govuk-error-message">You have entered part-time weekly hours for women but have not told us how many women work part-time.</p>
+    {% endif %}
+
+    <div class="inline-fields">
+
+        {{ govukInput({
+            id: options.prefix + '-pt-men',
+            name: options.prefix + '-pt-men',
+            value: data[options.prefix + '-pt-men'],
+            classes: 'govuk-input--width-4',
+            errorMessage: {
+                classes: 'govuk-visually-hidden'
+            } if (data[options.prefix + '-men-error'] == 'no-pt') else null,
+            label: {
+                text: 'Men',
+                classes: ' '
+            }
+        }) }}
+
+        {{ govukInput({
+            id: options.prefix + '-pt-women',
+            name: options.prefix + '-pt-women',
+            value: data[options.prefix + '-pt-women'],
+            classes: 'govuk-input--width-4',
+            errorMessage: {
+                classes: 'govuk-visually-hidden'
+            } if (data[options.prefix + '-women-error'] == 'no-pt') else null,
+            label: {
+                text: 'Women',
+                classes: ' '
+            }
+        }) }}
+
+    </div>
+
+{% endcall -%}
+
+{% call govukFieldset({
+    legend: {
+        text: options.supQuestion + ' during the week beginning 14 January 2019',
+        classes: "govuk-fieldset__legend--m",
+        isPageHeading: false
+    }
+}) %}
+
+    {% if options.supQuestionHint %}
+        <p>{{ options.supQuestionHint }}</p>
+    {% endif %}
+
+    {% if (data[options.prefix + '-men-error'] == 'no-hours') %}
+        <p class="govuk-error-message">You have told us how many men work part-time but have not entered part-time weekly hours for men.</p>
+    {% endif %}
+    {% if (data[options.prefix + '-women-error'] == 'no-hours') %}
+        <p class="govuk-error-message">You have told us how many women work part-time but have not entered part-time weekly hours for women.</p>
+    {% endif %}
+
+    <div class="inline-fields">
+
+        {{ govukInput({
+            id: options.prefix + '-pt-men-hours',
+            name: options.prefix + '-pt-men-hours',
+            value: data[options.prefix + '-pt-men-hours'],
+            classes: 'govuk-input--width-5',
+            errorMessage: {
+                classes: 'govuk-visually-hidden'
+            } if (data[options.prefix + '-men-error'] == 'no-hours') else null,
+            label: {
+                text: 'Men',
+                classes: ' '
+            }
+        }) }}
+
+        {{ govukInput({
+            id: options.prefix + '-pt-women-hours',
+            name: options.prefix + '-pt-women-hours',
+            value: data[options.prefix + '-pt-women-hours'],
+            classes: 'govuk-input--width-5',
+            errorMessage: {
+                classes: 'govuk-visually-hidden'
+            } if (data[options.prefix + '-women-error'] == 'no-hours') else null,
+            label: {
+                text: 'Women',
+                classes: ' '
+            }
+        }) }}
+
+    </div>
+
+{% endcall -%}
+
+<input type="hidden" name="{{options.prefix}}-men-error" id="{{options.prefix}}-men-error" value="{{ data[options.prefix + '-men-error'] | orElse('false') }}">
+<input type="hidden" name="{{options.prefix}}-women-error" id="{{options.prefix}}-women-error" value="{{ data[options.prefix + '-women-error'] | orElse('false') }}">
+
+<script>
+function detectErrors() {
+    let menInput = $('#{{options.prefix}}-pt-men').val();
+    let menHoursInput = $('#{{options.prefix}}-pt-men-hours').val();
+    let menErrorInput = $('#{{options.prefix}}-men-error');
+    let womenInput = $('#{{options.prefix}}-pt-women').val();
+    let womenHoursInput = $('#{{options.prefix}}-pt-women-hours').val();
+    let womenErrorInput = $('#{{options.prefix}}-women-error');
+    // Reset errors
+    menErrorInput.val('false');
+    womenErrorInput.val('false');
+    if (menInput && !menHoursInput) {
+        menErrorInput.val('no-hours');
+    }
+    if (!menInput && menHoursInput) {
+        menErrorInput.val('no-pt');
+    }
+    if (womenInput && !womenHoursInput) {
+        womenErrorInput.val('no-hours');
+    }
+    if (!womenInput && womenHoursInput) {
+        womenErrorInput.val('no-pt');
+    }
+}
+$('input').on('change keyup',function() {
+    detectErrors()
+});
+
+$(document).ready(function() {
+    detectErrors()
+});
+</script>
+
+{% endmacro %}

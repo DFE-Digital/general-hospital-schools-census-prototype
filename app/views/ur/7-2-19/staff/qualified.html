@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Qualified teachers at your school
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/quantity-and-hours.njk" import quantityAndHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="non-qualified">
+
+                <h1 class="govuk-heading-xl">Qualified teachers at your school</h1>
+
+                <p>Include only teachers here with Qualified Teacher Status (QTS).</p>
+
+                {{ quantityAndHours({
+                    subject: 'qualified teachers',
+                    prefix: 'qualified',
+                    supQuestion: 'Total number of hours worked by all part-time qualified teachers',
+                    supQuestionHint: 'Enter total directed hours worked by part-time qualified teachers only, excluding lunch hours.'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+
+{% endblock %}

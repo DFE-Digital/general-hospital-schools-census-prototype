@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    The number of SEN pupils born in 2016 entered is higher than your total number of SEN pupils
+{% endblock %}
+
+{% block content %}
+
+{% if data['sen-total'] | float >= data['sen-section'] | float  %}
+<script>
+
+window.location.href = 'detail-totals.html?sen-section-error=false';
+
+</script>
+{% endif %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">The number of SEN pupils born in 2016 entered is higher than your total number of SEN pupils</h1>
+
+                <p>You have told us that your total number of SEN pupils is {{ data['sen-total'] | friendlyNumber }} and the number of SEN pupils born in 2016 is {{ data['sen-section'] | friendlyNumber }}.</p>
+
+                {{ govukRadios({
+                    idPrefix: 'sen-section-skip',
+                    name: 'sen-section-skip',
+                    fieldset: {
+                        legend: {
+                            text: 'What do you want to do?',
+                            isPageHeading: false,
+                            classes: 'govuk-fieldset__legend--m'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Change the total number of SEN pupils',
+                            value: 'change-sen'
+                        },
+                        {
+                            text: 'Change the number of SEN pupils born in 2016',
+                            value: 'change-sen-section'
+                        },
+                        {
+                            text: 'Save your answers and update later',
+                            value: 'skip'
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+<script>
+
+    var nextPageRoutes = {
+        'change-sen' : 'sen-pupils.html',
+        'change-sen-section' : 'sen-section.html',
+        'skip' : 'detail-totals?sen-section-error=true'
+    }
+
+</script>
+
+{% endblock %}

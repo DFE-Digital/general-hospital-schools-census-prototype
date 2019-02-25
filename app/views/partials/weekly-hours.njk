@@ -1,0 +1,42 @@
+{% macro weeklyHours(options, data) %}
+
+{% from "input/macro.njk" import govukInput %}
+{% from "fieldset/macro.njk" import govukFieldset %}
+
+{% call govukFieldset({
+    legend: {
+        text: 'Total hours worked per week by ' + options.subject + ' during the week beginning 14 January 2019',
+        classes: "govuk-fieldset__legend--m",
+        isPageHeading: false
+    }
+}) %}
+
+   
+
+        {{ govukInput({
+            id: options.prefix + '-ft',
+            name: options.prefix + '-ft',
+            value: data[options.prefix + '-ft'],
+            classes: 'govuk-input--width-4',
+            label: {
+                text: 'Hours by full-time staff',
+                classes: ' '
+            }
+        }) }}
+
+        {{ govukInput({
+            id: options.prefix + '-pt',
+            name: options.prefix + '-pt',
+            value: data[options.prefix + '-pt'],
+            classes: 'govuk-input--width-4',
+            label: {
+                text: 'Hours by part-time staff',
+                classes: ' '
+            }
+        }) }}
+
+
+
+{% endcall -%}
+
+{% endmacro %}

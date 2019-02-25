@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Number of full-time sole registered pupils by age
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/full-time-pupils.njk" import fullTimePupils %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="dual.html">
+
+                <h1 class="govuk-heading-xl">Number of full-time sole registered pupils by age</h1>
+
+                <p>Enter the number of male and female pupils of each age as on 31 August 2018.</p>
+
+                <p>Enter transgender pupils as the gender that they identify as.</p>
+
+                {{ govukInsetText({
+                    text: 'If there are zero pupils in a category you can leave the box empty.'
+                }) }}
+
+                {{ fullTimePupils({prefix: 'full-time-sole'}, data) }}
+
+                <input type="hidden" name="full-time-sole-total" id="full-time-sole-total" class="page-input-total" value="{{ data['full-time-sole-total'] }}">
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+        <div class="govuk-grid-column-one-third" id="pupil-count-container">
+            <div class="sticky-item" id="pupil-count">
+                <h2 class="govuk-heading-l" id="pupil-count-header">0</h2>    
+                <span class="govuk-caption-l">Total pupils entered</span>
+            </div>
+        </div>
+
+</div>
+
+{% endblock %}

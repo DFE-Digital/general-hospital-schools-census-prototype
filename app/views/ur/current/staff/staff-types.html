@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    What type of staff work at your school?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="staff-numbers/hlta-teaching-assistants">
+
+                {% set selectedTypes = data['staff-types'] %}
+
+                <h1 class="govuk-heading-xl">What type of staff work at your school?</h1>
+
+                <p>Select all that apply</p>
+
+                {{ govukCheckboxes({
+                    idPrefix: 'staff-types',
+                    name: 'staff-types',
+                    fieldset: {
+                        legend: {
+                            text: 'What type of staff work at your school?',
+                            isPageHeading: false,
+                            classes: 'govuk-visually-hidden'
+                        }
+                    },
+                    items: [
+                        {
+                            text: 'Higher-level teaching assistants with HLTA qualification',
+                            value: '%hlta-teaching-assistants%',
+                            checked: selectedTypes | arrayContains('%hlta-teaching-assistants%')
+                        },
+                        {
+                            text: 'Teaching assistants',
+                            value: '%teaching-assistants%',
+                            checked: selectedTypes | arrayContains('%teaching-assistants%')
+                        },
+                        {
+                            text: 'Other assistants',
+                            value: '%other-assistants%',
+                            checked: selectedTypes | arrayContains('%other-assistants%')
+                        },
+                        {
+                            text: 'Admin staff',
+                            value: '%admin-staff%',
+                            checked: selectedTypes | arrayContains('%admin-staff%')
+                        },
+                        {
+                            text: 'Bursars',
+                            value: '%bursars%',
+                            checked: selectedTypes | arrayContains('%bursars%')
+                        },
+                        {
+                            text: 'Other staff',
+                            value: '%other-staff%',
+                            checked: selectedTypes | arrayContains('%other-staff%')
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

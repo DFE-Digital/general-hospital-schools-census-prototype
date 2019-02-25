@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    {{ data['la-name'] | orElse('Southamshire Council') }} collections
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">{{ data['la-name'] }} collections</h1>
+
+     </div>
+
+</div>
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-one-third">
+
+         <h2 class="govuk-heading-m">School census</h2>
+
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+
+            <h3 class="govuk-heading-m"><a href="">Spring census 2019</a></h3>
+            <p>104 of 207 submitted</p>
+
+    </div>
+
+</div>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-one-third">
+
+        <h2 class="govuk-heading-m">School-level annual school census</h2>
+
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+
+        <h3 class="govuk-heading-m"><a href="la-school-list.html">General hospital school census 2019</a></h3>
+        <p>0 of 2 submitted</p>
+
+    </div>
+
+</div>
+
+{% endblock %}

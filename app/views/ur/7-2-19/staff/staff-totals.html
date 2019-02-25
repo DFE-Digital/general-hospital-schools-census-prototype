@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Check your staff details
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">Check the total number of staff at your school</h1>
+
+                {{ govukTable({
+                    caption: "Total number of teaching staff",
+                    firstCellIsHeader: true,
+                    head: [
+                        {
+                            text: 'Type'
+                        },
+                        {
+                            text: 'Registration type'
+                        },
+                        {
+                            text: 'Total',
+                            format: 'numeric'
+                        },
+                        {
+                            text: ''
+                        }
+                    ],
+                    rows: [
+                        [
+                            {
+                                text: 'Part-time'
+                            },
+                            {
+                                text: 'Main dual registered'
+                            },
+                            {
+                                text: data['part-time-dual-total'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="part-time/dual-numbers.html?from-totals=true">Change</a>' | safe
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Part-time'
+                            },
+                            {
+                                text: 'Sole registered'
+                            },
+                            {
+                                text: data['part-time-sole-total'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="part-time/sole-numbers.html?from-totals=true">Change</a>' | safe
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Full-time'
+                            },
+                            {
+                                text: 'Main dual registered'
+                            },
+                            {
+                                text: data['full-time-dual-total'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="full-time/dual-numbers.html?from-totals=true">Change</a>' | safe
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Full-time'
+                            },
+                            {
+                                text: 'Sole registered'
+                            },
+                            {
+                                text: data['full-time-sole-total'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: '<a href="full-time/sole-numbers.html?from-totals=true">Change</a>' | safe
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Total number of teaching staff',
+                                colspan: '2'
+                            },
+                            {
+                                text: ''
+                            },
+                            {
+                                text: pupilTotal | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                text: ''
+                            }
+                        ]
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

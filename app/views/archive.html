@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Design archive
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">Design archive</h1>
+
+                <h2 class="govuk-heading-m"><a href="http://dfe-data-exchange-web-forms.herokuapp.com">Older versions</a></h2>
+                <p>Archived on 6 February 2019</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Older versions before real-time data saving was added to the prototype.</li>
+                </ul>
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Are any of your full-time pupils main dual registered?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">Are any of your full-time pupils main dual registered?</h1>
+
+                <p>A main dual registration means that the pupil is on another school’s register as well as your own.</p>
+
+                {{ govukRadios({
+                    classes: 'govuk-radios--inline',
+                    idPrefix: 'pt-dual-reg',
+                    name: 'pt-dual-reg',
+                    fieldset: {
+                        legend: {
+                            text: 'Are any of your full-time pupils main dual registered?',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--xl govuk-visually-hidden'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Yes',
+                            value: 'yes'
+                        },
+                        {
+                            text: 'No',
+                            value: 'no'
+                        }
+                    ]
+                }) }}
+                
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+
+<script>
+
+    var nextPageRoutes = {
+        yes : 'dual-numbers.html',
+        no : 'sole.html'
+    }
+
+</script>
+
+{% endblock %}

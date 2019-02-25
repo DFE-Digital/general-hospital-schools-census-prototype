@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    General hospital 2019 census
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+
+        {{ govukBreadcrumbs({
+            items: [
+                {
+                    text: "Collections",
+                    href: "la-view"
+                },
+                {
+                    text: "General hospital 2019"
+                }
+            ]
+        }) }}
+
+        <h1 class="govuk-heading-xl">General hospital school census 2019</h1>
+
+     </div>
+
+</div>
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-full">
+
+         {{ govukTable({
+            caption: 'Schools',
+            firstCellIsHeader: true,
+            head: [
+                {
+                    text: 'Status'
+                },
+                {
+                    text: 'LAESTAB'
+                },
+                {
+                    text: 'School'
+                },
+                {
+                    text: ''
+                }
+            ],
+            rows: [
+                [
+                    {
+                        text: 'Not started'
+                    },
+                    {
+                        text: '210/7066'
+                    },
+                    {
+                        text: data['la-school-name'] | orElse('Feethams High School')
+                    },
+                    {
+                        html: '<a href="task-list.html">Start census</a>'
+                    }
+                ],
+                [
+                    {
+                        text: 'Not started'
+                    },
+                    {
+                        text: '210/7046'
+                    },
+                    {
+                        text: 'Woods School'
+                    },
+                    {
+                        html: '<a href="task-list.html">Start census</a>'
+                    }
+                ]
+            ]
+            }) }}
+
+    </div>
+
+</div>
+{% endblock %}

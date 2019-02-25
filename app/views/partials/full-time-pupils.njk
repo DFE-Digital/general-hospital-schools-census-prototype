@@ -1,0 +1,550 @@
+{% macro fullTimePupils(options, data) %}
+
+{% from "input/macro.njk" import govukInput %}
+{% from "partials/part-time-pupils.njk" import partTimePupils %}
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            19 years old and over
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-19',
+            name: options.prefix + '-male-19',
+            value: data[options.prefix + '-male-19'] if data[options.prefix + '-male-19'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-19',
+            name: options.prefix + '-female-19',
+            value: data[options.prefix + '-female-19'] if data[options.prefix + '-female-19'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            18 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-18',
+            name: options.prefix + '-male-18',
+            value: data[options.prefix + '-male-18'] if data[options.prefix + '-male-18'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-18',
+            name: options.prefix + '-female-18',
+            value: data[options.prefix + '-female-18'] if data[options.prefix + '-female-18'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            17 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-17',
+            name: options.prefix + '-male-17',
+            value: data[options.prefix + '-male-17'] if data[options.prefix + '-male-17'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-17',
+            name: options.prefix + '-female-17',
+            value: data[options.prefix + '-female-17'] if data[options.prefix + '-female-17'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            16 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-16',
+            name: options.prefix + '-male-16',
+            value: data[options.prefix + '-male-16'] if data[options.prefix + '-male-16'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-16',
+            name: options.prefix + '-female-16',
+            value: data[options.prefix + '-female-16'] if data[options.prefix + '-female-16'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            15 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-15',
+            name: options.prefix + '-male-15',
+            value: data[options.prefix + '-male-15'] if data[options.prefix + '-male-15'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-15',
+            name: options.prefix + '-female-15',
+            value: data[options.prefix + '-female-15'] if data[options.prefix + '-female-15'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            14 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-14',
+            name: options.prefix + '-male-14',
+            value: data[options.prefix + '-male-14'] if data[options.prefix + '-male-14'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-14',
+            name: options.prefix + '-female-14',
+            value: data[options.prefix + '-female-14'] if data[options.prefix + '-female-14'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            13 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-13',
+            name: options.prefix + '-male-13',
+            value: data[options.prefix + '-male-13'] if data[options.prefix + '-male-13'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-13',
+            name: options.prefix + '-female-13',
+            value: data[options.prefix + '-female-13'] if data[options.prefix + '-female-13'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            12 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-12',
+            name: options.prefix + '-male-12',
+            value: data[options.prefix + '-male-12'] if data[options.prefix + '-male-12'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-12',
+            name: options.prefix + '-female-12',
+            value: data[options.prefix + '-female-12'] if data[options.prefix + '-female-12'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            11 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-11',
+            name: options.prefix + '-male-11',
+            value: data[options.prefix + '-male-11'] if data[options.prefix + '-male-11'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-11',
+            name: options.prefix + '-female-11',
+            value: data[options.prefix + '-female-11'] if data[options.prefix + '-female-11'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            10 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-10',
+            name: options.prefix + '-male-10',
+            value: data[options.prefix + '-male-10'] if data[options.prefix + '-male-10'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-10',
+            name: options.prefix + '-female-10',
+            value: data[options.prefix + '-female-10'] if data[options.prefix + '-female-10'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            9 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-9',
+            name: options.prefix + '-male-9',
+            value: data[options.prefix + '-male-9'] if data[options.prefix + '-male-9'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-9',
+            name: options.prefix + '-female-9',
+            value: data[options.prefix + '-female-9'] if data[options.prefix + '-female-9'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            8 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-8',
+            name: options.prefix + '-male-8',
+            value: data[options.prefix + '-male-8'] if data[options.prefix + '-male-8'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-8',
+            name: options.prefix + '-female-8',
+            value: data[options.prefix + '-female-8'] if data[options.prefix + '-female-8'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            7 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-7',
+            name: options.prefix + '-male-7',
+            value: data[options.prefix + '-male-7'] if data[options.prefix + '-male-7'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-7',
+            name: options.prefix + '-female-7',
+            value: data[options.prefix + '-female-7'] if data[options.prefix + '-female-7'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            6 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-6',
+            name: options.prefix + '-male-6',
+            value: data[options.prefix + '-male-6'] if data[options.prefix + '-male-6'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-6',
+            name: options.prefix + '-female-6',
+            value: data[options.prefix + '-female-6'] if data[options.prefix + '-female-6'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+<div class="govuk-grid-row age-row-width">
+    <div class="govuk-grid-column-one-third age-column-width age-padding-top-2">
+        <label class="govuk-label govuk-label--m">
+            5 years old
+        </label>
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-male-5',
+            name: options.prefix + '-male-5',
+            value: data[options.prefix + '-male-5'] if data[options.prefix + '-male-5'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Boys',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+    <div class="govuk-grid-column-one-third age-input age-padding-top-3">
+        {{ govukInput({
+            id: options.prefix + '-female-5',
+            name: options.prefix + '-female-5',
+            value: data[options.prefix + '-female-5'] if data[options.prefix + '-female-5'] else '',
+            classes: 'govuk-input--width-5 govuk-input--pupil',
+            type: 'number',
+            label: {
+                text: 'Girls',
+                classes: 'govuk-input--width-5 govuk-input--pupil'
+            }
+        }) }}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--s govuk-!-margin-bottom-3 govuk-section-break--visible">
+
+{{ partTimePupils(options, data) }}
+
+<div class="govuk-!-padding-bottom-5"></div>
+
+{% endmacro %}

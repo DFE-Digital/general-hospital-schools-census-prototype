@@ -1,0 +1,220 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Prototype options
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="start-page">
+
+                <h1 class="govuk-heading-xl">Prototype options</h1>
+
+                {% set totalPupilsHTML %}
+
+                {{ govukInput({
+                    id: 'yony-pupils-figure',
+                    name: 'yony-pupils-figure',
+                    value: data['yony-pupils-figure'] if data['yony-pupils-figure'] else '500',
+                    classes: 'govuk-input--width-5',
+                    label: {
+                        text: 'How many total pupils last year?',
+                        classes: ' '
+                    }
+                }) }}
+
+                {% endset -%}
+
+                {{ govukRadios({
+                    idPrefix: 'yony-pupils-trigger',
+                    name: 'yony-pupils-trigger',
+                    fieldset: {
+                        legend: {
+                            text: 'Trigger total number of pupils year on year calculation?',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--m'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'No',
+                            value: 'no',
+                            checked: 'true'
+                        },
+                        {
+                            text: 'Yes',
+                            value: 'yes',
+                            conditional: {
+                                html: totalPupilsHTML
+                            }
+                        }
+                    ]
+                }) }}
+
+                {% set FSMPupilsHTML %}
+
+                {{ govukInput({
+                    id: 'yony-fsm-figure',
+                    name: 'yony-fsm-figure',
+                    value: data['yony-fsm-figure'] if data['yony-fsm-figure'] else '30',
+                    classes: 'govuk-input--width-5',
+                    label: {
+                        text: 'How many FSM eligible pupils last year?',
+                        classes: ' '
+                    }
+                }) }}
+
+                {% endset -%}
+
+                {{ govukRadios({
+                    idPrefix: 'yony-fsm-trigger',
+                    name: 'yony-fsm-trigger',
+                    fieldset: {
+                        legend: {
+                            text: 'Trigger FSM eligible pupils year on year calculation?',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--m'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'No',
+                            value: 'no',
+                            checked: 'true'
+                        },
+                        {
+                            text: 'Yes',
+                            value: 'yes',
+                            conditional: {
+                                html: FSMPupilsHTML
+                            }
+                        }
+                    ]
+                }) }}
+
+                {% set SENPupilsHTML %}
+
+                {{ govukInput({
+                    id: 'yony-sen-figure',
+                    name: 'yony-sen-figure',
+                    value: data['yony-sen-figure'] if data['yony-sen-figure'] else '25',
+                    classes: 'govuk-input--width-5',
+                    label: {
+                        text: 'How many SEN pupils with a EHCP last year?',
+                        classes: ' '
+                    }
+                }) }}
+
+                {% endset -%}
+
+                {{ govukRadios({
+                    idPrefix: 'yony-sen-trigger',
+                    name: 'yony-sen-trigger',
+                    fieldset: {
+                        legend: {
+                            text: 'Trigger SEN pupils with EHCP year on year calculation?',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--m'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'No',
+                            value: 'no',
+                            checked: 'true'
+                        },
+                        {
+                            text: 'Yes',
+                            value: 'yes',
+                            conditional: {
+                                html: SENPupilsHTML
+                            }
+                        }
+                    ]
+                }) }}
+
+                {% set laNameHTML %}
+                    {{ govukInput({
+                        id: 'la-name',
+                        name: 'la-name',
+                        value: data['la-name'] if data['la-name'] else 'Southamshire Council',
+                        classes: 'govuk-input--width-20',
+                        label: {
+                            text: 'What should the local authority name show as?'
+                        }
+                    }) }}
+                {% endset -%}
+                
+                {% set schoolNameHTML %}
+                    {{ govukInput({
+                        id: 'school-name',
+                        name: 'school-name',
+                        value: data['school-name'] if data['school-name'] else 'Feethams High School',
+                        classes: 'govuk-input--width-20',
+                        label: {
+                            text: 'What should the school name show as?'
+                        }
+                    }) }}
+                {% endset -%}
+
+                {% set laSchoolNameHTML %}
+                    {{ govukInput({
+                        id: 'la-school-name',
+                        name: 'la-school-name',
+                        value: data['la-school-name'] if data['la-school-name'] else 'Feethams High School',
+                        classes: 'govuk-input--width-20',
+                        label: {
+                            text: 'What should the school name show as?'
+                        }
+                    }) }}
+                {% endset -%}
+
+                {{ govukRadios({
+                    idPrefix: 'user-type',
+                    name: 'user-type',
+                    fieldset: {
+                        legend: {
+                            text: 'Use prototype as...',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--m'
+                        }
+                    },
+                    items: [
+                        {
+                            text: 'School',
+                            value: 'school',
+                            conditional: {
+                                html: schoolNameHTML
+                            },
+                            checked: true
+                        },
+                        {
+                            text: 'Local authority',
+                            value: 'la',
+                            conditional: {
+                                html: laNameHTML + laSchoolNameHTML
+                            }
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

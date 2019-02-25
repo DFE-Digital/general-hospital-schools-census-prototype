@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Teaching assistants at your school
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%teaching-assistants%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'other-assistants'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'other-assistants' }}">
+
+                <h1 class="govuk-heading-xl">Teaching assistants at your school</h1>
+
+                {{ weeklyHours({
+                    subject: 'teaching assistants',
+                    prefix: 'teaching-assistants'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+
+
+{% endblock %}

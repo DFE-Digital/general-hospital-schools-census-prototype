@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    What is the gender of the Headteacher or Acting Headteacher?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ 'teacher-totals' if data['from-totals'] == 'true' else 'leave' }}">
+
+                {{ govukRadios({
+                    classes: 'govuk-radios--inline',
+                    idPrefix: 'head-gender',
+                    name: 'head-gender',
+                    fieldset: {
+                        legend: {
+                            text: 'What is the gender of the headteacher or acting headteacher?',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--xl'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Man',
+                            value: 'Man'
+                        },
+                        {
+                            text: 'Woman',
+                            value: 'Woman'
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

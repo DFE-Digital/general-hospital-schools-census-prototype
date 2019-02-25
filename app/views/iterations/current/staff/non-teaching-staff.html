@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Bursars staff at your school
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ 'staff-totals' if data['from-totals'] == 'true' else 'staff-types' }}">
+
+                <h1 class="govuk-heading-xl">Total number of non-teaching staff at your school</h1>
+
+                <p>Include any education support, administration or clerical staff.</p>
+
+                {% call govukFieldset({
+                    legend: {
+                        text: 'Total number of non-teaching staff during the week beginning 14 January 2019',
+                        classes: "govuk-fieldset__legend--m",
+                        isPageHeading: false
+                    }
+                }) %}
+
+                    <div class="inline-fields">
+
+                        {{ govukInput({
+                            id: 'non-teaching-ft',
+                            name: 'non-teaching-ft',
+                            value: data['non-teaching-ft'],
+                            classes: 'govuk-input--width-4',
+                            label: {
+                                text: 'Full-time staff',
+                                classes: ' '
+                            }
+                        }) }}
+
+                        {{ govukInput({
+                            id: 'non-teaching-pt',
+                            name: 'non-teaching-pt',
+                            value: data['non-teaching-pt'],
+                            classes: 'govuk-input--width-4',
+                            label: {
+                                text: 'Part-time staff',
+                                classes: ' '
+                            }
+                        }) }}
+
+                    </div>
+
+                {% endcall -%}
+
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

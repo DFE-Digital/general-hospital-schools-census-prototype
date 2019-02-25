@@ -1,0 +1,36 @@
+// Task list pattern
+
+// CSS from Zed's prototype
+
+
+.well--white-text {
+  color: govuk-colour("white");
+}
+
+.well--white-text a {
+  color: govuk-colour("white");
+}
+
+.well--turquoise {
+  background-color: govuk-colour("turquoise");
+}
+
+.well--blue {
+  background-color: govuk-colour("blue");
+  color: govuk-colour("white")
+}
+
+.well--blue a {
+  color: govuk-colour("white") !important;
+}
+
+.well {
+  height: 270px;
+  text-align: center;
+  padding-top: 24px;
+}
+
+.well--v2 {
+  height: inherit;
+  text-align: left;
+}

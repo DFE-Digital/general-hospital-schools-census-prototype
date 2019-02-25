@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Non-qualified teachers at your school
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['teacher-types'] | arrayContains('%non-qualified%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'graduates'
+</script>
+{% endif %}
+
+
+{% from "partials/quantity-and-hours.njk" import quantityAndHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../teacher-totals' if data['from-totals'] == 'true' else 'graduates' }}">
+
+                <h1 class="govuk-heading-xl">Non-qualified teachers at your school</h1>
+
+                <p>Do not include student teachers on school centred ITT courses.</p>
+
+                {{ quantityAndHours({
+                    subject: 'non-qualified teachers',
+                    prefix: 'non-qualified',
+                    supQuestion: 'Total number of hours worked by all part-time non-qualified teachers',
+                    supQuestionHint: 'Enter total directed hours worked by part-time non-qualified teachers only, excluding lunch hours.'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

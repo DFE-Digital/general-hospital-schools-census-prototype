@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Do any part-time pupils attend your school?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">Do any part-time pupils attend your school?</h1>
+
+                <p>A part-time pupil is expected to attend less than 10 sessions (must be under 5 years old)</p>
+
+                {{ govukRadios({
+                    classes: 'govuk-radios--inline',
+                    idPrefix: 'any-part-time',
+                    name: 'any-part-time',
+                    fieldset: {
+                        legend: {
+                            text: 'Do any part-time pupils attend your school?',
+                            isPageHeading: false,
+                            classes: 'govuk-fieldset__legend--xl govuk-visually-hidden'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Yes',
+                            value: 'yes'
+                        },
+                        {
+                            text: 'No',
+                            value: 'no'
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+<script>
+
+    var nextPageRoutes = {
+        yes : 'part-time/sole.html',
+        no : 'any-full-time.html'
+    }
+
+</script>
+
+{% endblock %}

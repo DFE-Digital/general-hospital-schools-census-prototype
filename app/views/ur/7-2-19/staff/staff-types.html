@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    What type of staff work at your school?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="qualified">
+
+                <h1 class="govuk-heading-xl">What type of staff work at your school?</h1>
+
+                <p>Select all that apply</p>
+
+                {{ govukCheckboxes({
+                    idPrefix: 'staff-types',
+                    name: 'staff-types',
+                    fieldset: {
+                        legend: {
+                            text: 'What type of staff work at your school?',
+                            isPageHeading: true,
+                            classes: 'govuk-visually-hidden'
+                        }
+                    },
+                    items: [
+                        {
+                            text: 'Qualified teachers with Qualified Teacher Status (QTS)',
+                            value: 'qualified',
+                            checked: data['staff-types'] | contains('qualified')
+                        },
+                        {
+                            text: 'Non-qualified teachers',
+                            value: 'non-qualified',
+                            checked: data['staff-types'] | contains('non-qualified')
+                        },
+                        {
+                            text: 'Teachers on a graduate training scheme',
+                            value: 'graduates',
+                            checked: data['staff-types'] | contains('graduates')
+                        },
+                        {
+                            text: 'Higher-level teaching assistants with HLTA qualification',
+                            value: 'htla-teaching-assistants',
+                            checked: data['staff-types'] | contains('htla-teaching-assistants')
+                        },
+                        {
+                            text: 'Teaching assistants',
+                            value: 'teaching-assistants',
+                            checked: data['staff-types'] | contains('teaching-assistants')
+                        },
+                        {
+                            text: 'Other assistants',
+                            value: 'assistants',
+                            checked: data['staff-types'] | contains('assistants')
+                        },
+                        {
+                            text: 'Admin staff',
+                            value: 'admin-staff',
+                            checked: data['staff-types'] | contains('admin')
+                        },
+                        {
+                            text: 'Bursars',
+                            value: 'bursars',
+                            checked: data['staff-types'] | contains('bursar')
+                        },
+                        {
+                            text: 'Other staff',
+                            value: 'other-staff',
+                            checked: data['staff-types'] | contains('other')
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

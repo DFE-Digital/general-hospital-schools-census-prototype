@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    How many students are eligible for free school meals at your school?
+{% endblock %}
+
+{% block content %}
+
+{% if data['no-pupils'] == 'yes' %}
+<script>
+window.location.href = 'detail-totals'
+</script>
+{% endif %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="fsm-too-high">
+
+                {% call govukFieldset({
+                legend: {
+                    text: "How many students are eligible for free school meals at your school?",
+                    classes: "govuk-fieldset__legend--xl",
+                    isPageHeading: true
+                }
+                }) %}
+
+                    {% if data['full-time-sole-total'] %}
+
+                        {{ govukInput({
+                            id: 'fsm-ft-sole',
+                            name: 'fsm-ft-sole',
+                            value: data['fsm-ft-sole'] if data['fsm-ft-sole'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Full-time sole registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+                    
+                    {% if data['part-time-sole-total'] %}
+
+                        {{ govukInput({
+                            id: 'fsm-pt-sole',
+                            name: 'fsm-pt-sole',
+                            value: data['fsm-pt-sole'] if data['fsm-pt-sole'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Part-time sole registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+                    {% if data['full-time-dual-total'] %}
+
+                        {{ govukInput({
+                            id: 'fsm-ft-dual',
+                            name: 'fsm-ft-dual',
+                            value: data['fsm-ft-dual'] if data['fsm-ft-dual'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Full-time main dual registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+                    {% if data['part-time-dual-total'] %}
+
+                        {{ govukInput({
+                            id: 'fsm-pt-dual',
+                            name: 'fsm-pt-dual',
+                            value: data['fsm-pt-dual'] if data['fsm-pt-dual'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Part-time main dual registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+                {% endcall %}
+
+                <input type="hidden" name="fsm-total" class="page-input-total">
+                <input type="hidden" name="fsm-error" value="false">
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

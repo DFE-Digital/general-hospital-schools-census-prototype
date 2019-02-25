@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Teaching staff on long term paid absence for longer than a term
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/quantity-and-hours.njk" import quantityAndHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="relief-staff">
+
+                <h1 class="govuk-heading-xl">Teaching staff on long term paid absence for longer than a term</h1>
+
+                <p>Enter the number of male and female staff on long term paid absence, as on 18 January 2019.</p>
+
+                {{ quantityAndHours({
+                    subject: 'teaching staff absent',
+                    prefix: 'leave',
+                    supQuestion: 'Total number of hours worked by all part-time staff on long term paid absence',
+                    supQuestionHint: 'Enter total directed hours worked by part-time staff only, excluding lunch hours.'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

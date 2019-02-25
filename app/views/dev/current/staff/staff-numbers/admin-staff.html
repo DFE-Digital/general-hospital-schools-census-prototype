@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Admin staff at your school
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%admin-staff%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'bursars'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'bursars' }}">
+
+                <h1 class="govuk-heading-xl">Admin staff at your school</h1>
+
+                {{ weeklyHours({
+                    subject: 'admin staff',
+                    prefix: 'admin'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

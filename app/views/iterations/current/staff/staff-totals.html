@@ -1,0 +1,227 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Check your staff details
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            {% if data['is-submitting'] == 'true' %}
+            <form action="../submit/contact-confirm.html">
+            {% else %}
+            <form action="../task-list">
+            {% endif %}
+
+                <h1 class="govuk-heading-xl">Check and save your answers</h1>
+                
+                <input type="hidden" name="staff-complete" value="true">
+                
+                <h2 class="govuk-heading-l">Non-teaching staff total</h2>
+
+                {{ govukSummaryList({
+                    rows: [
+                        {
+                            key: {
+                                text: "Full-time staff"
+                            },
+                            value: {
+                                text: data['non-teaching-ft'] | friendlyNumber
+                            },
+                            actions: {
+                                items: [
+                                    {
+                                        href: "non-teaching-staff?from-totals=true",
+                                        text: "Change",
+                                        visuallyHiddenText: "amount of full-time staff"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            key: {
+                                text: "Part-time staff"
+                            },
+                            value: {
+                                text: data['non-teaching-pt'] | friendlyNumber
+                            },
+                            actions: {
+                                items: [
+                                    {
+                                        href: "non-teaching-staff?from-totals=true",
+                                        text: "Change",
+                                        visuallyHiddenText: "amount of full-time staff"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                 }) }}
+                
+                <div class="govuk-!-padding-bottom-9"></div>
+
+                {{ govukTable({
+                    caption: "Hours worked by non-teaching staff",
+                    captionClasses: 'govuk-heading-l',
+                    firstCellIsHeader: true,
+                    head: [
+                        {
+                            text: 'Type'
+                        },
+                        {
+                            text: 'Full-time hrs/wk',
+                                format: 'numeric'
+                        },
+                        {
+                            text: 'Part-time hrs/wk',
+                                format: 'numeric'
+                        },
+                        {
+                            text: ''
+                        }
+                    ],
+                    rows: [
+                        [
+                            {
+                                text: 'Higher-level teaching assistants'
+                            },
+                            {
+                                html: data['hlta-teaching-assistants-pt'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: data['hlta-teaching-assistants-ft'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/hlta-teaching-assistants?from-totals=true">Change</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Teaching assistants'
+                            },
+                            {
+                                html: data['teaching-assistants-pt'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: data['teaching-assistants-ft'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/teaching-assistants?from-totals=true">Change</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Other assistants'
+                            },
+                            {
+                                html: data['other-assistants-pt'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: data['other-assistants-ft'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/other-assistants?from-totals=true">Change</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Admin staff'
+                            },
+                            {
+                                html: data['admin-pt'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: data['admin-ft'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/admin-staff?from-totals=true">Change</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Bursars'
+                            },
+                            {
+                                html: data['bursars-pt'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: data['bursars-ft'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/bursars?from-totals=true">Change</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Other staff'
+                            },
+                            {
+                                html: data['other-staff-pt'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: data['other-staff-ft'] | friendlyNumber,
+                                format: 'numeric'
+                            },
+                            {
+                                html: '<a href="staff-numbers/other-staff?from-totals=true">Change</a>'
+                            }
+                        ],
+                        [
+                            {
+                                text: 'Total'
+                            },
+                            {
+                                text: [data['hlta-teaching-assistants-ft'], data['teaching-assistants-ft'],  data['other-assistants-ft'], data['admin-ft'], data['bursars-ft'], data['other-staff-ft']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: [data['hlta-teaching-assistants-pt'], data['teaching-assistants-pt'],  data['other-assistants-pt'], data['admin-pt'], data['bursars-pt'], data['other-staff-pt']] | stringSum,
+                                format: 'numeric'
+                            },
+                            {
+                                text: ''
+                            }
+                        ]
+                    ]
+                }) }}
+
+                <div class="govuk-!-margin-bottom-9"></div>
+
+
+                {% if data['is-submitting'] == 'true' %}
+                {{ govukButton({
+                    html: 'Confirm and continue'
+                }) }}
+                <p><a href="../task-list.html?is-submitting=false">Cancel and return to tasks</a></p>
+                {% else %}
+                {{ govukButton({
+                    html: 'Save and return to tasks'
+                }) }}
+                {% endif %}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

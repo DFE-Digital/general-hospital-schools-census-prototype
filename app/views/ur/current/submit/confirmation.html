@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+<!-- Adds a class to increase vertical spacing for pages without a back button -->
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block pageTitle %}
+  Confirmation page example
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <div class="govuk-panel govuk-panel--confirmation">
+        <h1 class="govuk-panel__title">Census received</h1>
+
+      </div>
+
+      <p>
+        We have sent a confirmation to you and your local authority.
+      </p>
+
+      <h2 class="govuk-heading-m">What happens next</h2>
+      <p>You can still make changes and resubmit your census data until the deadline on 21 February 2019.</p>
+      <p>The Department for Education helpdesk will review your census data.</p>
+      <p>They will contact you either to confirm your census submission, or to ask for more information.</p>
+      <p><a href="https://www.gov.uk/service-manual/user-centred-design/resources/patterns/feedback-pages.html">What did you think of this service?</a> (takes 30 seconds)</p>
+
+      {{ govukButton({
+        text: 'Go back to all DfE services',
+        href: '../service-list',
+        classes: ' '
+      }) }}
+
+
+    </div>
+  </div>
+
+{% endblock %}

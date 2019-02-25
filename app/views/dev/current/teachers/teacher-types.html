@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    What type of teaching staff work at your school?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="staff-numbers/qualified">
+
+                {% set selectedTypes = data['teacher-types'] %}
+
+                <h1 class="govuk-heading-xl">What type of teaching staff work at your school?</h1>
+
+                <p>Select all that apply</p>
+
+                {{ govukCheckboxes({
+                    idPrefix: 'teacher-types',
+                    name: 'teacher-types',
+                    fieldset: {
+                        legend: {
+                            text: 'What type of teaching staff work at your school?',
+                            isPageHeading: false,
+                            classes: 'govuk-visually-hidden'
+                        }
+                    },
+                    items: [
+                        {
+                            text: 'Qualified teachers with Qualified Teacher Status (QTS)',
+                            value: '%qualified%',
+                            checked: selectedTypes | arrayContains('%qualified%')
+                        },
+                        {
+                            text: 'Non-qualified teachers',
+                            value: '%non-qualified%',
+                            checked: selectedTypes | arrayContains('%non-qualified%')
+                        },
+                        {
+                            text: 'Teachers on a graduate training scheme',
+                            value: '%graduates%',
+                            checked: selectedTypes | arrayContains('%graduates%')
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Are any of the teaching staff at your school currently on leave for a term or longer?
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">Are any of the teaching staff at your school currently on leave for a term or longer?</h1>
+
+                <p>For example, due to illness or maternity leave</p>
+
+                {{ govukRadios({
+                    classes: 'govuk-radios--inline',
+                    idPrefix: 'staff-on-leave',
+                    name: 'staff-on-leave',
+                    fieldset: {
+                        legend: {
+                            text: 'Are any of the staff at your school currently on leave for a term or longer?',
+                            isPageHeading: false,
+                            classes: 'govuk-visually-hidden'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Yes',
+                            value: 'yes'
+                        },
+                        {
+                            text: 'No',
+                            value: 'no'
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+<script>
+
+    var nextPageRoutes = {
+        yes: 'leave-numbers',
+        no: 'relief-staff'
+    }
+
+</script>
+
+{% endblock %}

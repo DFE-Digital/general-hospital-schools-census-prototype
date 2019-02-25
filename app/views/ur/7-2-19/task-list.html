@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+<!-- Adds a class to increase vertical spacing for pages without a back button -->
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block pageTitle %}
+  Task list
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-xl">{{ data['school-name'] | orElse('Feethams High School') }}</span>
+      <h1 class="govuk-heading-xl">
+        Return your general hospital school census
+      </h1>
+
+      <p class="govuk-body-l govuk-!-padding-bottom-5">The census deadline is 15 February 2019</p>
+
+      <ol class="app-task-list">
+        <li>
+          <h2 class="app-task-list__section">
+            <span class="app-task-list__section-number">1. </span> Tell us who to contact
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <a class="app-task-list__task-name" href="contact-details/contact.html" aria-describedby="eligibility-completed">
+                Your contact details
+              </a>
+              {% if data['contact-details-complete'] == 'true' %}
+              <strong class="govuk-tag app-task-list__task-completed" id="eligibility-completed">Completed</strong>
+              {% endif %}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h2 class="app-task-list__section">
+            <span class="app-task-list__section-number">2. </span> Tell us about your pupils
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <a class="app-task-list__task-name" href="pupil-numbers/check-what-you-need.html" aria-describedby="company-information-completed">
+                Check what you need
+              </a>
+              {% if data['has-checked-pupil'] == 'true' %}
+              <strong class="govuk-tag app-task-list__task-completed" id="eligibility-completed">Completed</strong>
+              {% endif %}
+            </li>
+            <li class="app-task-list__item">
+              {% if data['has-checked-pupil'] == 'true' or data['pupil-numbers-complete'] == 'true' %}
+                {% if data['pupil-numbers-complete'] == 'true' %}
+                  <a href="pupil-numbers/pupil-totals">Tell us about pupils on the register</a>
+                {% else %}
+                  <a href="pupil-numbers/any-part-time?from-totals=false">Tell us about pupils on the register</a>
+                {% endif %}
+              {% else %}
+              Tell us about pupils on the register
+              {% endif %}
+              {% if data['pupil-numbers-complete'] == 'true' %}
+                <strong class="govuk-tag app-task-list__task-completed" id="eligibility-completed">Completed</strong>
+              {% endif %}
+            </li>
+            <li class="app-task-list__item">
+              {% if data['pupil-numbers-complete'] == 'true' %}
+                {% if data['pupil-census-details-complete'] == 'true' %}
+                  <a href="pupil-census-details/detail-totals">Provide pupil census details</a>
+                {% else %}
+                  <a href="pupil-census-details/free-school-meals?from-totals=false">Provide pupil census details</a>
+                {% endif %}
+              {% else %}
+              Provide pupil census details
+              {% endif %}
+              {% if data['pupil-census-details-complete'] == 'true' %}
+                <strong class="govuk-tag app-task-list__task-completed" id="eligibility-completed">Completed</strong>
+              {% endif %}
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h2 class="app-task-list__section">
+            <span class="app-task-list__section-number">3. </span> Tell us about your staff
+          </h2>
+          <ul class="app-task-list__items">
+            <li class="app-task-list__item">
+              <a class="app-task-list__task-name" href="staff/check-what-you-need.html" aria-describedby="company-information-completed">
+                Check what you need
+              </a>
+              {% if data['has-checked-staff'] == 'true' %}
+              <strong class="govuk-tag app-task-list__task-completed" id="eligibility-completed">Completed</strong>
+              {% endif %}
+            </li>
+            <li class="app-task-list__item">
+              {% if data['has-checked-staff'] == 'true' %}
+                <a href="staff/headteacher.html">Provide staff census data</a>
+                {% else %}
+                Provide staff census data
+                {% endif %}
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+    </div>
+  </div>
+
+{% endblock %}

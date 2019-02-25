@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    DfE Sign-in
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+
+            <form action="service-list">
+
+                <h1 class="govuk-heading-xl">DfE Sign-in</h1>
+
+                <p>DfE Sign-in is the new way to sign-in to access some specific education sector services.</p>
+
+                {{ govukInput({
+                    id: 'username',
+                    name: 'username',
+                    value: data['username'] if data['username'] else ('admin@prototypeschool.sch.uk' if data['user-type'] == 'school' else 'test.user@prototypecouncil.gov.uk'),
+                    classes: 'govuk-input--width-20',
+                    label: {
+                        text: 'Email address or Secure Access username',
+                        classes: 'govuk-input--width-20'
+                    }
+                }) }}
+
+                {{ govukInput({
+                    id: 'password',
+                    name: 'password',
+                    value: data['password'] if data['password'] else 'Prototype1234',
+                    classes: 'govuk-input--width-20',
+                    type: 'password',
+                    label: {
+                        text: 'Password',
+                        classes: 'govuk-input--width-20'
+                    }
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}
