@@ -21,9 +21,13 @@
 
                 <p>Include any education support, administration or clerical staff.</p>
 
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
                 {% call govukFieldset({
                     legend: {
-                        text: 'Total number of non-teaching staff during the week beginning 14 January 2019',
+                        text: 'Total number of non-teaching staff ',
                         classes: "govuk-fieldset__legend--m",
                         isPageHeading: false
                     }

@@ -21,7 +21,9 @@
 
                 <h1 class="govuk-heading-xl">Relief teaching staff at your school</h1>
 
-                <p>Enter the number of male and female staff on long term paid absence, as on 18 January 2019.</p>
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
 
                 {{ quantityAndHours({
                     subject: 'relief teaching staff',

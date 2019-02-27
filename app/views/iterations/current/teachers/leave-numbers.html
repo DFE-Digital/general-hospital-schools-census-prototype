@@ -21,10 +21,15 @@
 
                 <h1 class="govuk-heading-xl">Teaching staff on long term paid absence for longer than a term</h1>
 
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
                 {{ quantityAndHours({
-                    subject: 'teaching staff absent',
+                    subject: 'absent teaching staff',
                     prefix: 'leave',
-                    supQuestion: 'Total contracted hours for all part-time teaching staff who were on long term paid absence'
+                    supQuestion: 'Total contracted hours for all part-time absent teaching staff',
+                    supQuestionHint: 'Enter total directed hours the absent part-time teaching staff would have worked, had they not been absent. Exclude lunch hours.'
                 }, data) }}
 
                 {{ govukButton({

@@ -30,6 +30,10 @@ window.location.href = 'graduates'
 
                 <p>Do not include student teachers on school centred ITT courses.</p>
 
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
                 {{ quantityAndHours({
                     subject: 'non-qualified teachers',
                     prefix: 'non-qualified',

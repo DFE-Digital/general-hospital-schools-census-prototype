@@ -25,7 +25,11 @@ window.location.href = 'admin-staff'
 
             <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'admin-staff' }}">
 
-                <h1 class="govuk-heading-xl">Other assistants at your school</h1>
+                <h1 class="govuk-heading-xl">Total hours worked by other assistants</h1>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
 
                 {{ weeklyHours({
                     subject: 'other assistants',
