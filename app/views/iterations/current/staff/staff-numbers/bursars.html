@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-    Bursars at your school
+    Total number of hours worked by bursars
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,9 @@ window.location.href = 'other-staff'
 
             <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'other-staff' }}">
 
-                <h1 class="govuk-heading-xl">Total hours worked by bursars</h1>
+                <h1 class="govuk-heading-xl">Total number of hours worked by bursars</h1>
+
+                <p>A bursar is a person who manages financial matters at your school.</p>
 
                 {{ govukInsetText({
                     text: 'Give totals for week beginning 14 January 2019'

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-    Other assistants at your school
+    Total number of hours worked by other education support assistants
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,11 @@ window.location.href = 'admin-staff'
 
             <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'admin-staff' }}">
 
-                <h1 class="govuk-heading-xl">Total hours worked by other assistants</h1>
+                <h1 class="govuk-heading-xl">Total number of hours worked by other education support assistants</h1>
+
+                <p>Do not include teaching or high-level teaching assistants.</p>
+
+                <p>Do not include unpaid or voluntary staff.</p>
 
                 {{ govukInsetText({
                     text: 'Give totals for week beginning 14 January 2019'

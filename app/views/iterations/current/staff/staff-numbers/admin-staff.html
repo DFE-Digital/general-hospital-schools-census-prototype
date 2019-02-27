@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-    Admin staff at your school
+    Total number of hours worked by administration staff
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,11 @@ window.location.href = 'bursars'
 
             <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'bursars' }}">
 
-                <h1 class="govuk-heading-xl">Total hours worked by admin staff</h1>
+                <h1 class="govuk-heading-xl">Total number of hours worked by administration staff</h1>
+
+                <p>This includes administration officer and secretaries.</p>
+
+                <p>Do not include bursars.</p>
 
                 {{ govukInsetText({
                     text: 'Give totals for week beginning 14 January 2019'

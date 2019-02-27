@@ -27,17 +27,18 @@ window.location.href = '../teacher-totals'
 
                 <h1 class="govuk-heading-xl">Teachers on a graduate training scheme at your school</h1>
 
-                <p>Do not include student teachers on school centred ITT courses.</p>
+                <p>Do not include student teachers on school-centered ITT courses.</p>
 
                 {{ govukInsetText({
                     text: 'Give totals for week beginning 14 January 2019'
                 }) }}
 
                 {{ quantityAndHours({
-                    subject: 'teachers on a graduate training scheme',
+                    subjectPrefix: 'How many',
+                    subject: 'teachers were on a graduate training scheme in the week beginning 14 January 2019?',
                     prefix: 'graduates',
-                    supQuestion: 'Total number of hours worked by all part-time teachers on a graduate training scheme',
-                    supQuestionHint: 'Enter total directed hours worked by part-time teachers on a graduate training scheme only, excluding lunch hours.'
+                    supQuestion: 'Total number of hours worked by part-time teachers on a graduate training scheme in the week beginning 14 January 2019',
+                    supQuestionHint: 'Do not include lunch hours'
                 }, data) }}
 
                 {{ govukButton({

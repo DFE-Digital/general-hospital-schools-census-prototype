@@ -28,7 +28,9 @@ window.location.href = 'graduates'
 
                 <h1 class="govuk-heading-xl">Non-qualified teachers at your school</h1>
 
-                <p>Do not include student teachers on school centred ITT courses.</p>
+                <p>Do not include student teachers on school-centered ITT courses.</p>
+
+                <p>Do not include non-teaching staff.</p>
 
                 {{ govukInsetText({
                     text: 'Give totals for week beginning 14 January 2019'
@@ -37,8 +39,8 @@ window.location.href = 'graduates'
                 {{ quantityAndHours({
                     subject: 'non-qualified teachers',
                     prefix: 'non-qualified',
-                    supQuestion: 'Total number of hours worked by all part-time non-qualified teachers',
-                    supQuestionHint: 'Enter total directed hours worked by part-time non-qualified teachers only, excluding lunch hours.'
+                    supQuestion: 'Total number of hours worked by part-time non-qualified teachers in week beginning 14 January 2019',
+                    supQuestionHint: 'Do not include lunch hours'
                 }, data) }}
 
                 {{ govukButton({
