@@ -21,13 +21,17 @@
 
                 <h1 class="govuk-heading-xl">Relief teaching staff at your school</h1>
 
-                <p>Enter the number of male and female staff on long term paid absence, as on 18 January 2019.</p>
+                <p>Relief staff are those who cover a short-term paid absence (less than one school term).</p>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
 
                 {{ quantityAndHours({
                     subject: 'relief teaching staff',
                     prefix: 'relief',
-                    supQuestion: 'Total number of hours worked by all part-time relief teaching staff',
-                    supQuestionHint: 'Enter total directed hours worked by part-time relief teaching staff only, excluding lunch hours.'
+                    supQuestion: 'Total number of hours worked by part-time relief teaching staff in week beginning 14 January 2019',
+                    supQuestionHint: 'Do not include lunch hours'
                 }, data) }}
 
                 {{ govukButton({

@@ -27,7 +27,7 @@ window.location.href = 'non-qualified'
 
                 <h1 class="govuk-heading-xl">Qualified teachers at your school</h1>
 
-                <p>Include only teachers here with Qualified Teacher Status (QTS).</p>
+                <p>This only includes teachers with Qualified Teacher Status (QTS).</p>
                 <p>Do not include EMTAG teachers or teachers funded under the single regeneration budget.</p>
 
                 {{ govukDetails({
@@ -35,11 +35,15 @@ window.location.href = 'non-qualified'
                     text: "Teachers teaching ethnic minority or traveller children are called EMTAG teachers. This stands for Ethnic Minority and Traveller Achievement Grant. The grant is given to schools to help manage pupils from these backgrounds and EMTAG teachers are employed to assist these pupils in their learning."
                 }) }}
 
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
                 {{ quantityAndHours({
                     subject: 'qualified teachers',
                     prefix: 'qualified',
-                    supQuestion: 'Total number of hours worked by all part-time qualified teachers',
-                    supQuestionHint: 'Enter total directed hours worked by part-time qualified teachers only, excluding lunch hours.'
+                    supQuestion: 'Total number of hours worked by part-time qualified teachers in week beginning 14 January 2019',
+                    supQuestionHint: 'Do not include lunch hours'
                 }, data) }}
 
                 {{ govukButton({

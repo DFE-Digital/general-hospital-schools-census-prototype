@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block pageTitle %}
-    Teaching assistants at your school
+    Total number of hours worked by teaching assistants
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,13 @@ window.location.href = 'other-assistants'
 
             <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'other-assistants' }}">
 
-                <h1 class="govuk-heading-xl">Teaching assistants at your school</h1>
+                <h1 class="govuk-heading-xl">Total number of hours worked by teaching assistants</h1>
+
+                <p>Do not include high-level teaching assistants with an HLTA qualification.</p>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
 
                 {{ weeklyHours({
                     subject: 'teaching assistants',
