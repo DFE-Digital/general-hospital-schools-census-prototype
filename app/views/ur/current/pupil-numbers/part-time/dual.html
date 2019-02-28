@@ -21,6 +21,10 @@
 
                 <p>A main dual registration means that the pupil is on another school’s register as well as your own.</p>
 
+                {{ govukInsetText({
+                    text: 'Give your answer based on pupils registered on 17 January 2019' | safe
+                }) }}
+
                 {{ govukRadios({
                     classes: 'govuk-radios--inline',
                     idPrefix: 'ft-dual-reg',

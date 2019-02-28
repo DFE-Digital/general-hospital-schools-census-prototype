@@ -21,6 +21,10 @@
 
                 <p>A sole registration means that the pupil is not on the register of another school.</p>
 
+                {{ govukInsetText({
+                    text: 'Give your answer based on pupils registered on 17 January 2019' | safe
+                }) }}
+
                 {{ govukRadios({
                     classes: 'govuk-radios--inline',
                     idPrefix: 'ft-sole-reg',

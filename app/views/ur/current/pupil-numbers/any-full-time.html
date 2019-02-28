@@ -19,6 +19,10 @@
 
                 <h1 class="govuk-heading-xl">Do any full-time pupils attend your school?</h1>
 
+                {{ govukInsetText({
+                    text: 'Give your answer based on pupils registered on 17 January 2019' | safe
+                }) }}
+
                 {{ govukRadios({
                     classes: 'govuk-radios--inline',
                     idPrefix: 'any-full-time',
