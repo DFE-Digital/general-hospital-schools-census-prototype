@@ -20,6 +20,10 @@
                 <h1 class="govuk-heading-xl">Do any part-time pupils attend your school?</h1>
 
                 <p>A part-time pupil is expected to attend less than 10 sessions (must be under 5 years old)</p>
+                
+                {{ govukInsetText({
+                    text: 'Give your answer based on pupils registered on 17 January 2019' | safe
+                }) }}
 
                 {{ govukRadios({
                     classes: 'govuk-radios--inline',
