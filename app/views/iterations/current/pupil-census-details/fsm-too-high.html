@@ -35,7 +35,7 @@ window.location.href = 'sen-pupils.html';
 
                 {% else %}
 
-                <p>You have told us that your total number of pupils is {{ data['pupil-total'] | friendlyNumber }} and the number of pupils eligible for free school meals is {{ data['fsm-total'] | friendlyNumber }}.</p>
+                <p class="govuk-body-l">You have told us that your total number of pupils is {{ data['pupil-total'] | friendlyNumber }} and the number of pupils eligible for free school meals is {{ data['fsm-total'] | friendlyNumber }}.</p>
 
                 {% endif %}
 

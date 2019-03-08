@@ -16,7 +16,7 @@
         Return your general hospital school census
       </h1>
 
-      <p class="govuk-body-l govuk-!-padding-bottom-5">The census deadline is 15 February 2019</p>
+      <p class="govuk-body-l govuk-!-padding-bottom-5">The census deadline is <strong>15 February 2019</strong></p>
 
       {% set totalSections = 6 %}
       {% set completedSections = 0 %}
@@ -144,6 +144,8 @@
       {% else %}
 
       <p>There {{ 'is one more section' if (remainingSections == 1) else ('are ' + remainingSections + ' more sections' if (remainingSections != totalSections) else 'are ' + totalSections + ' sections')  }} to complete before you can submit this school census.</p>
+
+      <p><a href="https://www.gov.uk/government/publications/general-hospital-schools-census-guide" target="_blank">Get help with your general hospital school census</a> (opens in a new window)</p>
 
       {% endif %}
 

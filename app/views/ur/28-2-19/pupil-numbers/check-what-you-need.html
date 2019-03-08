@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Check what you need
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="../task-list.html">
+
+                <h1 class="govuk-heading-xl">Check what pupil data you will need for this census</h1>
+
+                <p>To complete this part of the census you will need to have:</p>
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Types of pupil registration at your school</li>
+                    <li>Number of male and female pupils in each age group</li>
+                    <li>Number of pupils that are eligible for free school meals</li>
+                    <li>Number of pupils with special educational needs (SEN)</li>
+                    <li>Number of male and female staff in each role</li>
+                    <li>Number of hours worked by part-time staff</li>        
+                </ul>
+
+                <p>For some questions you will need to know the breakdown both full-time and part-time pupils. </p>
+                <p>You will need to know the exact dates of birth for pupils aged 4 and under.</p>
+
+                {{ govukInsetText({
+                    text: 'Give your answers based on pupils registered on 17 January 2019'
+                }) }}
+
+                <input type="hidden" name="has-checked-pupil" value="true">
+
+                {{ govukButton({
+                    html: 'Continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

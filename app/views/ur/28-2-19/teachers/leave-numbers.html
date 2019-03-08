@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Teaching staff on long term paid absence for longer than a term
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/quantity-and-hours.njk" import quantityAndHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ 'teacher-totals' if data['from-totals'] == 'true' else 'relief-staff' }}">
+
+                <h1 class="govuk-heading-xl">Teaching staff on long term paid absence for longer than a term</h1>
+
+                {{ quantityAndHours({
+                    subjectPrefix: 'How many',
+                    subject: 'teaching staff were on long-term paid absence in the week beginning 14 January 2019?',
+                    prefix: 'leave',
+                    supQuestion: 'Total number of directed hours not worked due to a long term paid absence in the week beginning 14 January 2019',
+                    supQuestionHint: 'Part-time teaching staff only'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

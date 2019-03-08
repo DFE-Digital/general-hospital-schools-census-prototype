@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Check what you need
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="../task-list.html">
+
+                <h1 class="govuk-heading-xl">Check what staff data you will need for this census</h1>
+
+                <p>To complete this part of the census you will need to have:</p>
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Details of staff on long term paid absence</li>
+                    <li>Details of relief staff</li>
+                    <li>Roles of staff at your school</li>
+                    <li>Number of male and female staff in each role</li>
+                    <li>Number of hours worked by part-time staff</li>
+                </ul>
+
+                <p>For most questions you will need to know the breakdown of:</p>
+
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Male and female staff</li>
+                    <li>Part-time and full-time staff</li>
+                </ul>
+
+                {{ govukInsetText({
+                    text: 'Give your answers based on staff employed in the week beginning 14 January 2019'
+                }) }}
+
+                <input type="hidden" name="has-checked-staff" value="true">
+
+                {{ govukButton({
+                    html: 'Continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

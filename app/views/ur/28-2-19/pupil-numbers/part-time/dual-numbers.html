@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Number of part-time main dual registered pupils by age
+{% endblock %}
+
+{% block content %}
+
+{% from "partials/part-time-pupils.njk" import partTimePupils %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            {% if data['from-totals'] == 'true' %}
+            <form action="../pupil-totals.html">
+            {% else %}
+            <form action="../any-full-time.html">
+            {% endif %}
+
+                <input type="hidden" name="from-totals" value="false">
+
+                <h1 class="govuk-heading-xl">Number of part-time main dual registered pupils by age</h1>
+
+                <p>Enter the number of pupils of each age as on 31 August 2018.</p>
+
+                <p>Enter transgender pupils as the gender that they identify as.</p>
+
+                {{ govukInsetText({
+                    text: 'If there are zero pupils in a category you can leave the box empty'
+                }) }}
+
+                {{ partTimePupils({prefix: 'part-time-dual'}, data) }}
+
+                <input type="hidden" name="part-time-dual-total" id="part-time-dual-total" class="page-input-total" value="{{ data['part-time-dual-total'] }}">
+
+                <div class="govuk-!-padding-bottom-5"></div>
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+        <div class="govuk-grid-column-one-third" id="pupil-count-container" style="display: none;">
+            <div class="sticky-item" id="pupil-count">
+                <h2 class="govuk-heading-l" id="pupil-count-header">0</h2>    
+                <span class="govuk-caption-l">Total pupils entered</span>
+            </div>
+        </div>
+
+</div>
+
+{% endblock %}

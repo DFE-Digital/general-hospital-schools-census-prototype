@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Total number of hours worked by bursars
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%bursars%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'other-staff'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'other-staff' }}">
+
+                <h1 class="govuk-heading-xl">Total number of hours worked by bursars</h1>
+
+                <p>A bursar is a person who manages financial matters at your school.</p>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
+                {{ weeklyHours({
+                    subject: 'bursars',
+                    prefix: 'bursars'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

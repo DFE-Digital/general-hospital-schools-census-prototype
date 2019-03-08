@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Total number of hours worked by higher-level teaching assistants
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%hlta-teaching-assistants%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'teaching-assistants'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'teaching-assistants' }}">
+
+                <h1 class="govuk-heading-xl">Total number of hours worked by higher-level teaching assistants</h1>
+
+                <p>This only includes teaching assistants with an HLTA qualification.</p>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
+                {{ weeklyHours({
+                    subject: 'higher-level teaching assistants',
+                    prefix: 'hlta-teaching-assistants'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

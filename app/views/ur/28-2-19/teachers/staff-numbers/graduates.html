@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Teachers on a graduate training scheme at your school
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['teacher-types'] | arrayContains('%graduates%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = '../teacher-totals'
+</script>
+{% endif %}
+
+{% from "partials/quantity-and-hours.njk" import quantityAndHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="../teacher-totals">
+
+                <h1 class="govuk-heading-xl">Teachers on a graduate training scheme at your school</h1>
+
+                <p>Do not include student teachers on school-centered ITT courses.</p>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
+                {{ quantityAndHours({
+                    subjectPrefix: 'How many',
+                    subject: 'teachers were on a graduate training scheme in the week beginning 14 January 2019?',
+                    prefix: 'graduates',
+                    supQuestion: 'Total number of hours worked by part-time teachers on a graduate training scheme in the week beginning 14 January 2019',
+                    supQuestionHint: 'Do not include lunch hours'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+
+
+{% endblock %}

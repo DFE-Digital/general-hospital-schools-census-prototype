@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Special Educational Needs (SEN) pupils
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="sen-too-high">
+
+                <h1 class="govuk-heading-xl">Special Educational Needs (SEN) pupils</h1>
+
+                {% call govukFieldset({
+                legend: {
+                    text: 'How many SEN pupils have a Health and Care Plan (EHC plan)?',
+                    classes: 'govuk-fieldset__legend--l',
+                    isPageHeading: true
+                }
+                }) %}
+
+                    {% if data['part-time-sole-total'] or data['full-time-sole-total'] %}
+
+                        {{ govukInput({
+                            id: 'sen-ehcp-sole',
+                            name: 'sen-ehcp-sole',
+                            value: data['sen-ehcp-sole'] if data['sen-ehcp-sole'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Sole registered pupils (full-time and part-time)'
+                            }
+                        }) }}
+
+                    {% endif %}
+                    
+                    {% if data['full-time-dual-total'] %}
+
+                        {{ govukInput({
+                            id: 'sen-ehcp-ft-dual',
+                            name: 'sen-ehcp-ft-dual',
+                            value: data['sen-ehcp-ft-dual'] if data['sen-ehcp-ft-dual'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Full-time main dual registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+                    {% if data['part-time-dual-total'] %}
+
+                        {{ govukInput({
+                            id: 'sen-ehcp-pt-dual',
+                            name: 'sen-ehcp-pt-dual',
+                            value: data['sen-ehcp-pt-dual'] if data['sen-ehcp-pt-dual'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Part-time main dual registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+
+                {% endcall %}
+
+                {% call govukFieldset({
+                legend: {
+                    text: 'How many SEN pupils do not have a Health and Care Plan (EHC plan)?',
+                    classes: 'govuk-fieldset__legend--l',
+                    isPageHeading: true
+                }
+                }) %}
+                    
+                    {% if data['part-time-sole-total'] or data['full-time-sole-total'] %}
+
+                        {{ govukInput({
+                            id: 'sen-sole',
+                            name: 'sen-sole',
+                            value: data['sen-sole'] if data['sen-sole'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Sole registered pupils (full-time and part-time)'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+                    {% if data['full-time-dual-total'] %}
+
+                        {{ govukInput({
+                            id: 'sen-ft-dual',
+                            name: 'sen-ft-dual',
+                            value: data['sen-ft-dual'] if data['sen-ft-dual'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Full-time main dual registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+                    {% if data['part-time-dual-total'] %}
+
+                        {{ govukInput({
+                            id: 'sen-pt-dual',
+                            name: 'sen-pt-dual',
+                            value: data['sen-pt-dual'] if data['sen-pt-dual'] else '',
+                            classes: 'govuk-input--width-5 add-value',
+                            label: {
+                                text: 'Part-time main dual registered pupils'
+                            }
+                        }) }}
+
+                    {% endif %}
+
+
+                {% endcall %}
+
+                <input type="hidden" name="sen-total" class="page-input-total">
+                <input type="hidden" name="sen-error" value="false">
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

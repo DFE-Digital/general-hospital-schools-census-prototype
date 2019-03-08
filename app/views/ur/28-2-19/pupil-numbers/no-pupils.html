@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    You have told us there are no pupils at you school
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form method="post">
+
+                <h1 class="govuk-heading-xl">You have told us there are no pupils at you school</h1>
+
+                {% set explainHTML %}
+
+                {{ govukTextarea({
+                    id: 'no-pupil-explain',
+                    name: 'no-pupil-explain',
+                    value: data['no-pupil-explain'] if data['no-pupil-explain'] else '',
+                    label: {
+                        text: 'Tell us why you are reporting no pupils in this census'
+                    }
+                }) }}
+
+                {% endset %}
+
+                {{ govukRadios({
+                    idPrefix: 'no-pupils',
+                    name: 'no-pupils',
+                    fieldset: {
+                        legend: {
+                            text: 'Is this correct?',
+                            isPageHeading: true,
+                            classes: 'govuk-fieldset__legend--m'
+                        }
+                            },
+                            items: [
+                        {
+                            text: 'Yes',
+                            value: 'yes',
+                            conditional: {
+                                html: explainHTML
+                            }
+                        },
+                        {
+                            text: 'No, I want to start again',
+                            value: 'no'
+                        }
+                    ]
+                }) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+<script>
+
+var nextPageRoutes = {
+    yes: 'pupil-totals',
+    no: '../task-list'
+}
+
+</script>
+
+{% endblock %}

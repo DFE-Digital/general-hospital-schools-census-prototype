@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Total number of hours worked by other clerical staff
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%other-staff%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = '../staff-totals'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="../staff-totals">
+
+                <h1 class="govuk-heading-xl">Total number of hours worked by other clerical staff</h1>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
+                {{ weeklyHours({
+                    subject: 'other staff',
+                    prefix: 'other-staff'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

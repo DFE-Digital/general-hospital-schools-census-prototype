@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Qualified teachers at your school
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['teacher-types'] | arrayContains('%qualified%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'non-qualified'
+</script>
+{% endif %}
+
+{% from "partials/quantity-and-hours.njk" import quantityAndHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../teacher-totals' if data['from-totals'] == 'true' else 'non-qualified' }}">
+
+                <h1 class="govuk-heading-xl">Qualified teachers at your school</h1>
+
+                <p>This only includes teachers with Qualified Teacher Status (QTS).</p>
+                <p>Do not include EMTAG teachers or teachers funded under the single regeneration budget.</p>
+
+                {{ govukDetails({
+                    summaryText: "What is an EMTAG teacher?",
+                    text: "Teachers teaching ethnic minority or traveller children are called EMTAG teachers. This stands for Ethnic Minority and Traveller Achievement Grant. The grant is given to schools to help manage pupils from these backgrounds and EMTAG teachers are employed to assist these pupils in their learning."
+                }) }}
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
+                {{ quantityAndHours({
+                    subject: 'qualified teachers',
+                    prefix: 'qualified',
+                    supQuestion: 'Total number of hours worked by part-time qualified teachers in week beginning 14 January 2019',
+                    supQuestionHint: 'Do not include lunch hours'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+
+{% endblock %}

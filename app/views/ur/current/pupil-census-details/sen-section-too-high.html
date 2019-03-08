@@ -27,7 +27,7 @@ window.location.href = 'detail-totals.html?sen-section-error=false';
 
                 <h1 class="govuk-heading-xl">The number of SEN pupils born in 2016 entered is higher than your total number of SEN pupils</h1>
 
-                <p>You have told us that your total number of SEN pupils is {{ data['sen-total'] | friendlyNumber }} and the number of SEN pupils born in 2016 is {{ data['sen-section'] | friendlyNumber }}.</p>
+                <p class="govuk-body-l">You have told us that your total number of SEN pupils is {{ data['sen-total'] | friendlyNumber }} and the number of SEN pupils born in 2016 is {{ data['sen-section'] | friendlyNumber }}.</p>
 
                 {{ govukRadios({
                     idPrefix: 'sen-section-skip',

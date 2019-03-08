@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Total number of hours worked by administration staff
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%admin-staff%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'bursars'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'bursars' }}">
+
+                <h1 class="govuk-heading-xl">Total number of hours worked by administration staff</h1>
+
+                <p>This includes administration officer and secretaries.</p>
+
+                <p>Do not include bursars.</p>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
+                {{ weeklyHours({
+                    subject: 'admin staff',
+                    prefix: 'admin'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+    Total number of hours worked by other education support assistants
+{% endblock %}
+
+{% block content %}
+
+{% if not (data['staff-types'] | arrayContains('%other-assistants%')) and not (data['from-totals'] == 'true') %}
+<script>
+window.location.href = 'admin-staff'
+</script>
+{% endif %}
+
+{% from "partials/weekly-hours.njk" import weeklyHours %}
+
+<div class="govuk-grid-row">
+
+        <div class="govuk-grid-column-two-thirds">
+
+            {{ govukBackLink({
+                text: 'Back',
+                href: 'javascript:history.back()'
+            }) }}
+
+            <form action="{{ '../staff-totals' if data['from-totals'] == 'true' else 'admin-staff' }}">
+
+                <h1 class="govuk-heading-xl">Total number of hours worked by other education support assistants</h1>
+
+                <p>Do not include teaching or high-level teaching assistants.</p>
+
+                <p>Do not include unpaid or voluntary staff.</p>
+
+                {{ govukInsetText({
+                    text: 'Give totals for week beginning 14 January 2019'
+                }) }}
+
+                {{ weeklyHours({
+                    subject: 'other assistants',
+                    prefix: 'other-assistants'
+                }, data) }}
+
+                {{ govukButton({
+                    html: 'Save and continue'
+                }) }}
+
+            </form>
+
+        </div>
+
+</div>
+
+{% endblock %}

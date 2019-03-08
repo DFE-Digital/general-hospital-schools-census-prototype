@@ -57,6 +57,8 @@ $(document).ready(function() {
 		total += Number($(this).val())
 	})
 
+	$('#pupil-count').css('width', $('#pupil-count').width())
+
 	$('#pupil-count-header').text(total)
 	$('.page-input-total').val(total)
 })
