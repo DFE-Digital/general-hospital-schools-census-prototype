@@ -17,12 +17,12 @@
                 href: 'javascript:history.back()'
             }) }}
 
-            {% if data['from-sen'] == 'true' %}
+            {% if data['is-submitting'] == 'true' %}
+            <form action="../pupil-census-details/detail-totals.html?is-submitting=true">
+            {% elseif data['from-sen'] == 'true' %}
             <form action="../pupil-census-details/sen-pupils.html">
             {% elseif data['from-fsm'] == 'true' %}
             <form action="../pupil-census-details/free-school-meals.html">
-            {% elseif data['is-submitting'] == 'true' %}
-            <form action="../pupil-census-details/detail-totals.html?is-submitting=true">
             {% else %}
             <form action="../task-list.html">
             {% endif %}
