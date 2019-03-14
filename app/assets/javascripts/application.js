@@ -141,3 +141,5 @@ $(document).ready(function() {
 		})
 	}
 })
+
+$('.query .govuk-warning-text__icon').html('?')
